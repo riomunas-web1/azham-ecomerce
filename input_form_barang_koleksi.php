@@ -37,17 +37,29 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO barang_koleksi (id_koleksi, nama_barang, harga, diskon, stock, tipe, gambar) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['id_koleksi'], "int"),
-                       GetSQLValueString($_POST['nama_barang'], "int"),
-                       GetSQLValueString($_POST['harga'], "int"),
-                       GetSQLValueString($_POST['diskon'], "int"),
-                       GetSQLValueString($_POST['stock'], "int"),
-                       GetSQLValueString($_POST['tipe'], "text"),
-                       GetSQLValueString($_POST['gambar'], "text"));
+  $insertSQL = sprintf(
+    "INSERT INTO barang_koleksi 
+      (id_koleksi, nama_barang, harga, diskon, stock, tipe, gambar) 
+    VALUES (%s, %s, %s, %s, %s, %s, %s)",
+       GetSQLValueString($_POST['id_koleksi'], "int"),
+       GetSQLValueString($_POST['nama_barang'], "int"),
+       GetSQLValueString($_POST['harga'], "int"),
+       GetSQLValueString($_POST['diskon'], "int"),
+       GetSQLValueString($_POST['stock'], "int"),
+       GetSQLValueString($_POST['tipe'], "text"),
+       GetSQLValueString($_FILES['gambar']['name'], "text"));
 
-  mysql_select_db($database_koneksi, $koneksi);
-  $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
+    mysql_select_db($database_koneksi, $koneksi);
+    $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
+
+    #copy file
+    $direktori = 'files/'; //Folder penyimpanan file
+    $max_size  = 1000000*10; //Ukuran file maximal 10mb
+    $nama_file = $_FILES['gambar']['name']; //Nama file yang akan di Upload
+    $file_size = $_FILES['gambar']['size']; //Ukuran file yang akan di Upload
+    $nama_tmp  = $_FILES['gambar']['tmp_name']; //Nama file sementara
+    $upload = $direktori . $nama_file; //Memposisikan direktori penyimpanan dan file
+    move_uploaded_file($nama_tmp, $upload);
 
   $insertGoTo = "form_barang_koleksi.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -110,8 +122,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
       <td>
     <form name="form" enctype="multipart/form-data" action="proses.php" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-    <input name="file" type="file" style="cursor:pointer;" />
-    <input type="submit" name="submit" value="Upload" />
+    <input type="file" name="gambar" style="cursor:pointer;" />
+    <!-- <input type="submit" name="submit" value="Upload" /> -->
     <br />Ukuran File Maximal: 10mb.
     </form></td>
     </tr>
