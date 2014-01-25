@@ -61,19 +61,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     $upload = $direktori . $nama_file; //Memposisikan direktori penyimpanan dan file
     move_uploaded_file($nama_tmp, $upload);
 
-$nama_barang = $_POST['nama_barang'];  
-$harga = $_POST['harga'];  
-$jumlah = $_POST['stock'];  
-$status = $_POST['status'];  
-
-$subtotal = $harga * $jumlah ;  
-$diskon = $diskon;
-
-//menghitung total keseluruhan  
-$total = $subtotal - $diskon;  
- 
-
-
   $insertGoTo = "form_barang_koleksi.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
