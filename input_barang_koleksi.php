@@ -44,7 +44,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['diskon'], "int"),
                        GetSQLValueString($_POST['stock'], "int"),
                        GetSQLValueString($_POST['tipe'], "text"),
-                       GetSQLValueString($_POST['gambar'], "text"));
+                       GetSQLValueString($nama_files, "text"));
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
@@ -106,12 +106,16 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Gambar:</td>
-      <td><input type="text" name="gambar" value="" size="32" /></td>
+      
+      <td><form name="form" enctype="multipart/form-data" action="proses.php" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+    Pilih File: <input name="file" type="file" style="cursor:pointer;" />
+    <input type="submit" name="submit" value="Upload" />
+    </form></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
-      <td><input name="Submit" type="submit" value="Kirim" />
-      <input name="Submit2" type="reset" value="Batal" /></td>
+      <td>&nbsp;</td>
     </tr>
   </table>
   <input type="hidden" name="MM_insert" value="form1" />
