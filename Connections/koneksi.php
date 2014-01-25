@@ -5,6 +5,6 @@
 $hostname_koneksi = "localhost";
 $database_koneksi = "dbbarang";
 $username_koneksi = "root";
-$password_koneksi = "";
+$password_koneksi = "admin";
 $koneksi = mysql_pconnect($hostname_koneksi, $username_koneksi, $password_koneksi) or trigger_error(mysql_error(),E_USER_ERROR); 
 ?>
