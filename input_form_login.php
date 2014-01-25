@@ -41,6 +41,48 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
 					   
+ $username = addslashes(strip_tags ($_POST['username']));
+$password = addslashes(strip_tags ($_POST['password']));
+
+//script ini untuk mengecek apakah form sudah terisi semua
+if ($username&&$password) {
+//berfunsgi untuk mengecek form tidak boleh lebih dari 10
+ if (strlen($username)> 8){
+ echo "username tidak boleh lebih dari 8 karakter";
+ }
+ else {
+//password harus 6-25 karakter
+ if (strlen($password)> 8 || strlen($confirm)<6){
+ echo "Password harus antara 6-8 karakter";
+ }
+ else {
+//untuk mengecek apakah form password dan form konfirmasi password sudah sama
+ 
+//fungsi script ini adalah untuk mengecek ketersediaan username, jika tidak tersedia maka program akan berjalan
+ if ($num_row ==0) {
+ $password = md5($password);
+ $confirm = md5($confirm);
+ $sql_insert = mysql_query("INSERT INTO users VALUES ('','$username','$password','$confirm_password')");
+ echo "Pendaftaran berhasil. Login <a href='koneksi.php'>disini</a>";
+ }
+ else {
+ echo "Username sudah terdaftar";
+ }
+ }
+ else {
+ echo "Password yang kamu masukan tidak sama!";
+ 
+}
+ 
+}
+ 
+}
+ 
+}
+ 
+else {
+ echo "Tolong penuhi form pendaftaran!";
+ }
 
 
   mysql_select_db($database_koneksi, $koneksi);
