@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_form_pelanggan" value="name:id_pelanggan;datatype:int,name:nama_pelanggan;datatype:string,name:jenis_kelamin;datatype:string,name:alamat;datatype:string,name:kota;datatype:string,name:kode_pos;datatype:int,name:email;datatype:string,name:no_telpon;datatype:string" />
+	<infoitem key="UD_pelanggan" value="name:id_pelanggan;datatype:int,name:nama_pelanggan;datatype:string,name:jenis_kelamin;datatype:string,name:alamat;datatype:string,name:kota;datatype:string,name:kode_pos;datatype:int,name:email;datatype:string,name:no_telpon;datatype:string" />
+</info>

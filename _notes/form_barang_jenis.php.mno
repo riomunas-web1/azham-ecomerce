@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_barang_jenis" value="name:id_jenis;datatype:int,name:nama_jenis;datatype:string,name:keterangan;datatype:string" />
+</info>

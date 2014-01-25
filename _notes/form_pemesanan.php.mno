@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_form_pemesanan" value="name:id_pesan;datatype:int,name:tanggal;datatype:date,name:jam;datatype:time,name:status_bayar;datatype:string,name:total_harga;datatype:int,name:biaya_kirim;datatype:int,name:total_pembayaran;datatype:int,name:status_kirim;datatype:string" />
+</info>
