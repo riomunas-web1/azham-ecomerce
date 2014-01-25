@@ -106,8 +106,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Gambar:</td>
-      <td><label for="fileField"></label>
-      <input type="file" name="fileField" id="fileField" /></td>
+      
+      <td>
+    <form name="form" enctype="multipart/form-data" action="proses.php" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+    <input name="file" type="file" style="cursor:pointer;" />
+    <input type="submit" name="submit" value="Upload" />
+    <br />Ukuran File Maximal: 10mb.
+    </form></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
