@@ -62,13 +62,13 @@ $totalPages_barang_jenis = ceil($totalRows_barang_jenis/$maxRows_barang_jenis)-1
 <body>
 <table border="1">
   <tr>
-    <td>id_jenis</td>
+    <td>sid</td>
     <td>nama_jenis</td>
     <td>keterangan</td>
   </tr>
   <?php do { ?>
     <tr>
-      <td><?php echo $row_barang_jenis['id_jenis']; ?></td>
+      <td><?php echo $row_barang_jenis['sid']; ?></td>
       <td><?php echo $row_barang_jenis['nama_jenis']; ?></td>
       <td><?php echo $row_barang_jenis['keterangan']; ?></td>
     </tr>
