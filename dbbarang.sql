@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 21, 2014 at 08:49 PM
+-- Generation Time: Jan 27, 2014 at 06:27 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -26,6 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
+  `sid` varchar(36) NOT NULL,
   `userid` varchar(8) NOT NULL,
   `passid` varchar(6) NOT NULL,
   PRIMARY KEY (`userid`)
@@ -35,8 +36,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`userid`, `passid`) VALUES
-('ddada', 'dadad');
+INSERT INTO `admin` (`sid`, `userid`, `passid`) VALUES
+('', '111', '1234'),
+('', '118', '0'),
+('', 'ad', '1414'),
+('', 'azham', '123'),
+('', 'azham1', '0'),
+('', 'azham11', '333'),
+('da', 'dad', '11111');
 
 -- --------------------------------------------------------
 
@@ -45,20 +52,19 @@ INSERT INTO `admin` (`userid`, `passid`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `barang_jenis` (
-  `id_jenis` int(11) NOT NULL,
+  `sid` varchar(36) NOT NULL,
   `nama_jenis` char(30) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_jenis`)
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang_jenis`
 --
 
-INSERT INTO `barang_jenis` (`id_jenis`, `nama_jenis`, `keterangan`) VALUES
-(33, 'dada', 'aaaa'),
-(1212, 'fa', 'dadada'),
-(121212, 'dada', 'dadada');
+INSERT INTO `barang_jenis` (`sid`, `nama_jenis`, `keterangan`) VALUES
+('2aaa5a0a-8777-11e3-bda0-582c80139263', 'nama_jenis', 'keterangan'),
+('94e3c447-8777-11e3-bda0-582c80139263', 'nama_jenis', 'ket');
 
 -- --------------------------------------------------------
 
@@ -67,24 +73,21 @@ INSERT INTO `barang_jenis` (`id_jenis`, `nama_jenis`, `keterangan`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `barang_koleksi` (
-  `id_koleksi` int(11) NOT NULL,
+  `sid` varchar(36) NOT NULL,
   `nama_barang` char(35) NOT NULL,
+  `Status` varchar(6) NOT NULL,
   `harga` int(11) NOT NULL,
   `diskon` int(11) NOT NULL,
   `stock` int(8) NOT NULL,
   `tipe` char(15) NOT NULL,
   `gambar` blob NOT NULL,
-  PRIMARY KEY (`id_koleksi`)
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `barang_koleksi`
 --
 
-INSERT INTO `barang_koleksi` (`id_koleksi`, `nama_barang`, `harga`, `diskon`, `stock`, `tipe`, `gambar`) VALUES
-(77, 'toshiba', 55, 7, 2, 'accesories', 0x67616761),
-(331, '0', 55, 7, 2, 'accesories', 0x64616461),
-(3319, 'toshiba', 55, 7, 2, 'accesories', 0x64616461);
 
 -- --------------------------------------------------------
 
@@ -93,6 +96,7 @@ INSERT INTO `barang_koleksi` (`id_koleksi`, `nama_barang`, `harga`, `diskon`, `s
 --
 
 CREATE TABLE IF NOT EXISTS `forget_password` (
+  `sid` varchar(36) NOT NULL,
   `username` varchar(8) NOT NULL,
   KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -101,9 +105,6 @@ CREATE TABLE IF NOT EXISTS `forget_password` (
 -- Dumping data for table `forget_password`
 --
 
-INSERT INTO `forget_password` (`username`) VALUES
-('azham'),
-('azham11');
 
 -- --------------------------------------------------------
 
@@ -112,6 +113,7 @@ INSERT INTO `forget_password` (`username`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `login` (
+  `sid` varchar(36) NOT NULL,
   `username` varchar(8) NOT NULL,
   `password` varchar(11) NOT NULL,
   KEY `username` (`username`)
@@ -121,8 +123,6 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Dumping data for table `login`
 --
 
-INSERT INTO `login` (`username`, `password`) VALUES
-('azham11', 'dada');
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ INSERT INTO `login` (`username`, `password`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pelanggan` (
-  `id_pelanggan` int(10) NOT NULL,
+  `sid` varchar(36) NOT NULL,
   `nama_pelanggan` char(30) NOT NULL,
   `jenis_kelamin` char(6) NOT NULL,
   `alamat` varchar(45) NOT NULL,
@@ -139,17 +139,13 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   `kode_pos` int(10) NOT NULL,
   `email` varchar(35) NOT NULL,
   `no_telpon` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_pelanggan`)
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `alamat`, `kota`, `kode_pos`, `email`, `no_telpon`) VALUES
-(11218, 'azham', 'pria', 'gga', 'gaga', 4444, 'azhamcool@yahoo.com', '+627777777'),
-(112172, 'azham', 'pria', 'fsfa', 'aaaa', 83611, 'azhamcool@yahoo.com', '2147483647'),
-(11231101, 'azham', 'pria', 'daada', 'dada', 83600, 'azhamcool@yahoo.com', '+6281918211444');
 
 -- --------------------------------------------------------
 
@@ -158,7 +154,7 @@ INSERT INTO `pelanggan` (`id_pelanggan`, `nama_pelanggan`, `jenis_kelamin`, `ala
 --
 
 CREATE TABLE IF NOT EXISTS `pemesanan` (
-  `id_pesan` int(11) NOT NULL,
+  `sid` varchar(36) NOT NULL,
   `tanggal` date NOT NULL,
   `jam` time NOT NULL,
   `status_bayar` char(1) NOT NULL,
@@ -166,16 +162,13 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   `biaya_kirim` int(11) NOT NULL,
   `total_pembayaran` int(11) NOT NULL,
   `status_kirim` char(1) NOT NULL,
-  PRIMARY KEY (`id_pesan`)
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pemesanan`
 --
 
-INSERT INTO `pemesanan` (`id_pesan`, `tanggal`, `jam`, `status_bayar`, `total_harga`, `biaya_kirim`, `total_pembayaran`, `status_kirim`) VALUES
-(7, '1999-09-04', '11:54:00', 'S', 150000, 5000, 155000, 'D'),
-(71, '1999-09-04', '11:54:00', 'S', 150000, 5000, 155000, 'P');
 
 -- --------------------------------------------------------
 
@@ -184,18 +177,18 @@ INSERT INTO `pemesanan` (`id_pesan`, `tanggal`, `jam`, `status_bayar`, `total_ha
 --
 
 CREATE TABLE IF NOT EXISTS `pemesanan_detail` (
-  `id_pesan` int(11) NOT NULL,
+  `sid` varchar(36) NOT NULL,
+  `barang_koleksi` varchar(36) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `harga_beli` int(11) NOT NULL,
-  KEY `id_pesan` (`id_pesan`)
+  KEY `barang_koleksi` (`barang_koleksi`),
+  KEY `sid` (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pemesanan_detail`
 --
 
-INSERT INTO `pemesanan_detail` (`id_pesan`, `jumlah`, `harga_beli`) VALUES
-(71, 2, 15000);
 
 -- --------------------------------------------------------
 
@@ -204,6 +197,7 @@ INSERT INTO `pemesanan_detail` (`id_pesan`, `jumlah`, `harga_beli`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `register` (
+  `sid` varchar(36) NOT NULL,
   `username` varchar(8) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(11) NOT NULL,
@@ -218,6 +212,26 @@ CREATE TABLE IF NOT EXISTS `register` (
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`username`, `email`, `password`, `confirm password`, `alamat`, `no_telpon`, `keterangan`) VALUES
-('azham11a', 'azhamcool@yahoo.com', '4545', '4545', 'selong lombok NTB', '+6281918211444', 'kapan kapan'),
-('labkom-9', 'azhamcool@yahoo.com', 'dada', 'dada', 'daaaaaaaaaaaaaa', '+6281918211444', 'gak');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `forget_password`
+--
+ALTER TABLE `forget_password`
+  ADD CONSTRAINT `forget_password_ibfk_1` FOREIGN KEY (`username`) REFERENCES `register` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `login`
+--
+ALTER TABLE `login`
+  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`username`) REFERENCES `register` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pemesanan_detail`
+--
+ALTER TABLE `pemesanan_detail`
+  ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`barang_koleksi`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE,
+  ADD CONSTRAINT `pemesanan_detail_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `pemesanan` (`sid`) ON DELETE CASCADE;
