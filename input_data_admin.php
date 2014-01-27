@@ -37,7 +37,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO `admin` (userid, passid) VALUES (%s, %s)",
+  $insertSQL = sprintf("INSERT INTO `admin` (sid, userid, passid) VALUES (uuid(), 'user1'. 'rahasia')",
                        GetSQLValueString($_POST['userid'], "int"),
                        GetSQLValueString($_POST['passid'], "int"));
 
@@ -80,7 +80,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Passid:</td>
-      <td><input type="text" name="passid" maxlength="6" value="" size="32" /></td>
+      <td><input type="password" name="passid" maxlength="6" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
@@ -89,7 +89,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
     </tr>
   </table>
   <p><center>
-    <a href="input_form_forget_password.php">Recover</a> your password if you don't remember it</center></p>
+  <a href="input_forget_password.php">Recover</a> your password if you don't remember it</center></p>
   <p>&nbsp;</p>
   <p>
     <input type="hidden" name="MM_insert" value="form2" />

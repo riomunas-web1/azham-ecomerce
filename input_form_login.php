@@ -81,7 +81,7 @@ $password = addslashes(strip_tags ($_POST['password']));
     </tr>
   </table>
   <p align="center"><a href="input_form_register.php">Register</a> if you don't have an account.</p>
-  <p align="center"><a href="input_form_forget_password.php">Recover</a> your password if you don't remember it. </p>
+  <p align="center"><a href="input_forget_password.php">Recover</a> your password if you don't remember it. </p>
   <p>
     <input type="hidden" name="MM_insert" value="form1" />
   </p>
