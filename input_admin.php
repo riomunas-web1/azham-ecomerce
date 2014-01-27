@@ -37,15 +37,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO barang_jenis (sid, nama_jenis, keterangan) values (uuid(), 'nama_jenis', 'keterangan')",
-                       GetSQLValueString($_POST['sid'], "int"),
-                       GetSQLValueString($_POST['nama_jenis'], "text"),
-                       GetSQLValueString($_POST['keterangan'], "text"));
+  $insertSQL = sprintf("INSERT INTO `admin` (userid, passid) (uuid(), 'user1', 'rahasia')"
+,
+                       GetSQLValueString($_POST['userid'], "text"),
+                       GetSQLValueString($_POST['passid'], "text"));
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 
-  $insertGoTo = "form_barang_jenis.php";
+  $insertGoTo = "form_admin.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -53,27 +53,32 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
 
-<form method="post" name="form1" action="<?php echo $editFormAction; ?>">
+<body>
+<form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
   <table align="center">
     <tr valign="baseline">
-      <td nowrap align="right">Id_jenis:</td>
-      <td><input type="text" name="sid" value="" size="32"></td>
+      <td nowrap="nowrap" align="right">Userid:</td>
+      <td><input type="text" name="userid" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
-      <td nowrap align="right">Nama_jenis:</td>
-      <td><input type="text" name="nama_jenis" value="" size="32"></td>
+      <td nowrap="nowrap" align="right">Passid:</td>
+      <td><input type="text" name="passid" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
-      <td nowrap align="right" valign="top">Keterangan:</td>
-      <td><textarea name="keterangan" cols="50" rows="5"></textarea></td>
-    </tr>
-    <tr valign="baseline">
-      <td nowrap align="right">&nbsp;</td>
-      <td><input name="Submit" type="submit" value="Kirim">
-      <input name="Submit2" type="reset" value="Batal"></td>
+      <td nowrap="nowrap" align="right">&nbsp;</td>
+      <td><input name="Submit" type="submit" value="Masuk" />
+      <input name="Submit2" type="reset" value="Batal" /></td>
     </tr>
   </table>
-  <input type="hidden" name="MM_insert" value="form1">
+  <input type="hidden" name="MM_insert" value="form1" />
 </form>
 <p>&nbsp;</p>
+</body>
+</html>

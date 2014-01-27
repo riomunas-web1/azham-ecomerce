@@ -40,10 +40,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO login (username, password) VALUES (%s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
-					   
- $username = addslashes(strip_tags ($_POST['username']));
-$password = addslashes(strip_tags ($_POST['password']));
-
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
@@ -81,7 +77,7 @@ $password = addslashes(strip_tags ($_POST['password']));
     </tr>
   </table>
   <p align="center"><a href="input_form_register.php">Register</a> if you don't have an account.</p>
-  <p align="center"><a href="input_forget_password.php">Recover</a> your password if you don't remember it. </p>
+  <p align="center"><a href="input_form_forget_password.php">Recover</a> your password if you don't remember it. </p>
   <p>
     <input type="hidden" name="MM_insert" value="form1" />
   </p>

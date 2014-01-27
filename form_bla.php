@@ -31,25 +31,26 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$editFormAction = $_SERVER['PHP_SELF'];
-if (isset($_SERVER['QUERY_STRING'])) {
-  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+$maxRows_form_bla = 10;
+$pageNum_form_bla = 0;
+if (isset($_GET['pageNum_form_bla'])) {
+  $pageNum_form_bla = $_GET['pageNum_form_bla'];
 }
+$startRow_form_bla = $pageNum_form_bla * $maxRows_form_bla;
 
-if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO forget_password (username) VALUES (%s)",
-                       GetSQLValueString($_POST['username'], "text"));
+mysql_select_db($database_koneksi, $koneksi);
+$query_form_bla = "SELECT * FROM `input`";
+$query_limit_form_bla = sprintf("%s LIMIT %d, %d", $query_form_bla, $startRow_form_bla, $maxRows_form_bla);
+$form_bla = mysql_query($query_limit_form_bla, $koneksi) or die(mysql_error());
+$row_form_bla = mysql_fetch_assoc($form_bla);
 
-  mysql_select_db($database_koneksi, $koneksi);
-  $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
-
-  $insertGoTo = "form_forget_password.php";
-  if (isset($_SERVER['QUERY_STRING'])) {
-    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
-    $insertGoTo .= $_SERVER['QUERY_STRING'];
-  }
-  header(sprintf("Location: %s", $insertGoTo));
+if (isset($_GET['totalRows_form_bla'])) {
+  $totalRows_form_bla = $_GET['totalRows_form_bla'];
+} else {
+  $all_form_bla = mysql_query($query_form_bla);
+  $totalRows_form_bla = mysql_num_rows($all_form_bla);
 }
+$totalPages_form_bla = ceil($totalRows_form_bla/$maxRows_form_bla)-1;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -59,20 +60,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 </head>
 
 <body>
-<form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
-  <table align="center">
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Username:</td>
-      <td><input type="text" name="username" value="" size="32" /></td>
+<table border="1">
+  <tr>
+    <td>game</td>
+    <td>keterangan</td>
+  </tr>
+  <?php do { ?>
+    <tr>
+      <td><?php echo $row_form_bla['game']; ?></td>
+      <td><?php echo $row_form_bla['keterangan']; ?></td>
     </tr>
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">&nbsp;</td>
-      <td><input type="submit" value="Kirim" />
-      <input name="Reset" type="reset" value="Batal" /></td>
-    </tr>
-  </table>
-  <input type="hidden" name="MM_insert" value="form1" />
-</form>
-<p>&nbsp;</p>
+    <?php } while ($row_form_bla = mysql_fetch_assoc($form_bla)); ?>
+</table>
 </body>
 </html>
+<?php
+mysql_free_result($form_bla);
+?>
