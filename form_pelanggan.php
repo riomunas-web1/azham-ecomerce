@@ -62,7 +62,7 @@ $totalPages_form_pelanggan = ceil($totalRows_form_pelanggan/$maxRows_form_pelang
 <body>
 <table border="1">
   <tr>
-    <td>id_pelanggan</td>
+    <td>sid</td>
     <td>nama_pelanggan</td>
     <td>jenis_kelamin</td>
     <td>alamat</td>
@@ -73,7 +73,7 @@ $totalPages_form_pelanggan = ceil($totalRows_form_pelanggan/$maxRows_form_pelang
   </tr>
   <?php do { ?>
     <tr>
-      <td><?php echo $row_form_pelanggan['id_pelanggan']; ?></td>
+      <td><?php echo $row_form_pelanggan['sid']; ?></td>
       <td><?php echo $row_form_pelanggan['nama_pelanggan']; ?></td>
       <td><?php echo $row_form_pelanggan['jenis_kelamin']; ?></td>
       <td><?php echo $row_form_pelanggan['alamat']; ?></td>

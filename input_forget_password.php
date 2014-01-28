@@ -37,7 +37,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO forget_password (username) VALUES (%s)",
+  $insertSQL = sprintf("INSERT INTO forget_password (sid, username) VALUES (uuid(), %s)",
                        GetSQLValueString($_POST['username'], "text"));
 
   mysql_select_db($database_koneksi, $koneksi);

@@ -62,11 +62,13 @@ $totalPages_form_login = ceil($totalRows_form_login/$maxRows_form_login)-1;
 <body>
 <table border="1">
   <tr>
+  	<td>sid</td>
     <td>username</td>
     <td>password</td>
   </tr>
   <?php do { ?>
     <tr>
+      <td><?php echo $row_form_login['sid']; ?></td>
       <td><?php echo $row_form_login['username']; ?></td>
       <td><?php echo $row_form_login['password']; ?></td>
     </tr>

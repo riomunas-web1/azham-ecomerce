@@ -37,8 +37,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO pemesanan (id_pesan, tanggal, jam, status_bayar, total_harga, biaya_kirim, total_pembayaran, status_kirim) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                       GetSQLValueString($_POST['id_pesan'], "int"),
+  $insertSQL = sprintf("INSERT INTO pemesanan (sid, tanggal, jam, status_bayar, total_harga, biaya_kirim, total_pembayaran, status_kirim) VALUES (uuid(), %s, %s, %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['tanggal'], "date"),
                        GetSQLValueString($_POST['jam'], "date"),
                        GetSQLValueString($_POST['status_bayar'], "text"),
@@ -68,10 +67,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <body>
 <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
   <table align="center">
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Id_pesan:</td>
-      <td><input type="text" name="id_pesan" maxlength="11" value="" size="32" /></td>
-    </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Tanggal:</td>
       <td><input type="text" name="tanggal" maxlength="10" value="" size="32" /></td>
