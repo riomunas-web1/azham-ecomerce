@@ -62,6 +62,7 @@ $totalPages_register = ceil($totalRows_register/$maxRows_register)-1;
 <body>
 <table border="1">
   <tr>
+  <td>sid</td>
     <td>username</td>
     <td>email</td>
     <td>password</td>
@@ -72,6 +73,7 @@ $totalPages_register = ceil($totalRows_register/$maxRows_register)-1;
   </tr>
   <?php do { ?>
     <tr>
+    <td><?php echo $row_register['sid']; ?></td>
       <td><?php echo $row_register['username']; ?></td>
       <td><?php echo $row_register['email']; ?></td>
       <td><?php echo $row_register['password']; ?></td>

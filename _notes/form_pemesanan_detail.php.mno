@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
-	<infoitem key="UD_pemesanan_detail" value="name:id_pesan;datatype:int,name:jumlah;datatype:int,name:harga_beli;datatype:int" />
+	<infoitem key="UD_pemesanan_detail" value="name:sid;datatype:string,name:barang_koleksi;datatype:string,name:jumlah;datatype:int,name:harga_beli;datatype:int" />
 </info>

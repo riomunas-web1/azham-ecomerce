@@ -62,7 +62,7 @@ $totalPages_form_pemesanan = ceil($totalRows_form_pemesanan/$maxRows_form_pemesa
 <body>
 <table border="1">
   <tr>
-    <td>id_pesan</td>
+    <td>sid</td>
     <td>tanggal</td>
     <td>jam</td>
     <td>status_bayar</td>
@@ -73,7 +73,7 @@ $totalPages_form_pemesanan = ceil($totalRows_form_pemesanan/$maxRows_form_pemesa
   </tr>
   <?php do { ?>
     <tr>
-      <td><?php echo $row_form_pemesanan['id_pesan']; ?></td>
+      <td><?php echo $row_form_pemesanan['sid']; ?></td>
       <td><?php echo $row_form_pemesanan['tanggal']; ?></td>
       <td><?php echo $row_form_pemesanan['jam']; ?></td>
       <td><?php echo $row_form_pemesanan['status_bayar']; ?></td>

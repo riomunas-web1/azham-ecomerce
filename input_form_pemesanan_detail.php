@@ -37,15 +37,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO admin (sid, userid, passid) values ( uuid(), %s, %s)"
-,
-                       GetSQLValueString($_POST['userid'], "text"),
-                       GetSQLValueString($_POST['passid'], "text"));
-
+  $insertSQL = sprintf("INSERT INTO pemesanan_detail (sid, pemesanan, barang_koleksi, jumlah) VALUES (uuid(), %s, %s, %s)",
+					   GetSQLValueString($_POST['pemesanan'], "text"),
+                       GetSQLValueString($_POST['barang_koleksi'], "text"),
+                       GetSQLValueString($_POST['jumlah'], "int"));
+                       
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 
-  $insertGoTo = "form_admin.php";
+  $insertGoTo = "form_pemesanan_detail.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
@@ -63,17 +63,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <body>
 <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
   <table align="center">
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Userid:</td>
-      <td><input type="text" name="userid" value="" size="32" /></td>
+  <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Pemesanan:</td>
+      <td><input type="text" name="pemesanan" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Passid:</td>
-      <td><input type="text" name="passid" value="" size="32" /></td>
+      <td nowrap="nowrap" align="right">barang_koleksi:</td>
+      <td><input type="text" name="barang_koleksi" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Jumlah:</td>
+      <td><input type="text" name="jumlah" value="" size="32" /></td>
+    </tr>
+        <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
-      <td><input name="Submit" type="submit" value="Masuk" />
+      <td><input name="Submit" type="submit" value="Kirim" />
       <input name="Submit2" type="reset" value="Batal" /></td>
     </tr>
   </table>

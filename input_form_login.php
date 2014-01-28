@@ -37,7 +37,7 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO login (username, password) VALUES (%s, %s)",
+  $insertSQL = sprintf("INSERT INTO login (sid, username, password) VALUES (uuid(), %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
 

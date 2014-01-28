@@ -62,7 +62,7 @@ $totalPages_barang_koleksi = ceil($totalRows_barang_koleksi/$maxRows_barang_kole
 <body>
 <table border="1">
   <tr>
-    <td>id_koleksi</td>
+    <td>sid</td>
     <td>nama_barang</td>
     <td>harga</td>
     <td>diskon</td>
@@ -72,7 +72,7 @@ $totalPages_barang_koleksi = ceil($totalRows_barang_koleksi/$maxRows_barang_kole
   </tr>
   <?php do { ?>
     <tr>
-      <td><?php echo $row_barang_koleksi['id_koleksi']; ?></td>
+      <td><?php echo $row_barang_koleksi['sid']; ?></td>
       <td><?php echo $row_barang_koleksi['nama_barang']; ?></td>
       <td><?php echo $row_barang_koleksi['harga']; ?></td>
       <td><?php echo $row_barang_koleksi['diskon']; ?></td>

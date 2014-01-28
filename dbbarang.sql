@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2014 at 06:27 PM
+-- Generation Time: Jan 28, 2014 at 09:50 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -40,10 +40,14 @@ INSERT INTO `admin` (`sid`, `userid`, `passid`) VALUES
 ('', '111', '1234'),
 ('', '118', '0'),
 ('', 'ad', '1414'),
+('', 'azhadm', '13131'),
 ('', 'azham', '123'),
 ('', 'azham1', '0'),
 ('', 'azham11', '333'),
-('da', 'dad', '11111');
+('e24019e3-878c-11e3-bda0-582c80139263', 'bukangit', '123331'),
+('da', 'dad', '11111'),
+('f313c95e-878c-11e3-bda0-582c80139263', 'fafa', '123331'),
+('1282fb8d-878f-11e3-bda0-582c80139263', 'gaga', '123331');
 
 -- --------------------------------------------------------
 
@@ -63,8 +67,10 @@ CREATE TABLE IF NOT EXISTS `barang_jenis` (
 --
 
 INSERT INTO `barang_jenis` (`sid`, `nama_jenis`, `keterangan`) VALUES
-('2aaa5a0a-8777-11e3-bda0-582c80139263', 'nama_jenis', 'keterangan'),
-('94e3c447-8777-11e3-bda0-582c80139263', 'nama_jenis', 'ket');
+('97bba37c-878c-11e3-bda0-582c80139263', '1334d', 'ada'),
+('bc142c72-8781-11e3-bda0-582c80139263', 'nama_jenis', 'ket'),
+('d6d88fd1-878c-11e3-bda0-582c80139263', '1334d', 'ada'),
+('ec5a75d3-878b-11e3-bda0-582c80139263', 'computer2', 'barangggggg');
 
 -- --------------------------------------------------------
 
@@ -75,7 +81,6 @@ INSERT INTO `barang_jenis` (`sid`, `nama_jenis`, `keterangan`) VALUES
 CREATE TABLE IF NOT EXISTS `barang_koleksi` (
   `sid` varchar(36) NOT NULL,
   `nama_barang` char(35) NOT NULL,
-  `Status` varchar(6) NOT NULL,
   `harga` int(11) NOT NULL,
   `diskon` int(11) NOT NULL,
   `stock` int(8) NOT NULL,
@@ -88,6 +93,8 @@ CREATE TABLE IF NOT EXISTS `barang_koleksi` (
 -- Dumping data for table `barang_koleksi`
 --
 
+INSERT INTO `barang_koleksi` (`sid`, `nama_barang`, `harga`, `diskon`, `stock`, `tipe`, `gambar`) VALUES
+('561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 'toshiba', 15000, 8, 15, 'accesories', 0x312e706e67);
 
 -- --------------------------------------------------------
 
@@ -105,6 +112,8 @@ CREATE TABLE IF NOT EXISTS `forget_password` (
 -- Dumping data for table `forget_password`
 --
 
+INSERT INTO `forget_password` (`sid`, `username`) VALUES
+('e09c988e-87d3-11e3-8ba2-e89a8fb9e2bc', 'kami');
 
 -- --------------------------------------------------------
 
@@ -123,6 +132,8 @@ CREATE TABLE IF NOT EXISTS `login` (
 -- Dumping data for table `login`
 --
 
+INSERT INTO `login` (`sid`, `username`, `password`) VALUES
+('8d731e38-87d3-11e3-8ba2-e89a8fb9e2bc', 'kami', 'dadah');
 
 -- --------------------------------------------------------
 
@@ -146,6 +157,9 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
 -- Dumping data for table `pelanggan`
 --
 
+INSERT INTO `pelanggan` (`sid`, `nama_pelanggan`, `jenis_kelamin`, `alamat`, `kota`, `kode_pos`, `email`, `no_telpon`) VALUES
+('b0977af4-8792-11e3-bda0-582c80139263', 'azham', 'pria', 'adada', 'dddd', 83611, 'azhamcool@yahoo.com', '+6281918211444'),
+('e2490ffc-8790-11e3-bda0-582c80139263', 'azham', 'pria', 'aaaaaaaaaa', 'dadada', 83611, 'azhamcool@yahoo.com', '+6281918211444');
 
 -- --------------------------------------------------------
 
@@ -169,6 +183,8 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
 -- Dumping data for table `pemesanan`
 --
 
+INSERT INTO `pemesanan` (`sid`, `tanggal`, `jam`, `status_bayar`, `total_harga`, `biaya_kirim`, `total_pembayaran`, `status_kirim`) VALUES
+('229acc46-8791-11e3-bda0-582c80139263', '1999-09-04', '11:54:00', 'S', 150000, 5000, 155000, 'D');
 
 -- --------------------------------------------------------
 
@@ -178,17 +194,19 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
 
 CREATE TABLE IF NOT EXISTS `pemesanan_detail` (
   `sid` varchar(36) NOT NULL,
+  `pemesanan` varchar(36) NOT NULL,
   `barang_koleksi` varchar(36) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `harga_beli` int(11) NOT NULL,
-  KEY `barang_koleksi` (`barang_koleksi`),
-  KEY `sid` (`sid`)
+  KEY `pemesanan` (`pemesanan`),
+  KEY `barang_koleksi` (`barang_koleksi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pemesanan_detail`
 --
 
+INSERT INTO `pemesanan_detail` (`sid`, `pemesanan`, `barang_koleksi`, `jumlah`) VALUES
+('9f40e95f-8824-11e3-8ba2-e89a8fb9e2bc', '229acc46-8791-11e3-bda0-582c80139263', '561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 6);
 
 -- --------------------------------------------------------
 
@@ -212,6 +230,8 @@ CREATE TABLE IF NOT EXISTS `register` (
 -- Dumping data for table `register`
 --
 
+INSERT INTO `register` (`sid`, `username`, `email`, `password`, `confirm password`, `alamat`, `no_telpon`, `keterangan`) VALUES
+('6ff7d2b8-8790-11e3-bda0-582c80139263', 'kami', 'azhamcool@yahoo.com', 'dadah', 'dadah1', 'aaaaaaaaaaaaa', '+6281918211444', 'ddddddddd');
 
 --
 -- Constraints for dumped tables
@@ -233,5 +253,5 @@ ALTER TABLE `login`
 -- Constraints for table `pemesanan_detail`
 --
 ALTER TABLE `pemesanan_detail`
-  ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`barang_koleksi`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE,
-  ADD CONSTRAINT `pemesanan_detail_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `pemesanan` (`sid`) ON DELETE CASCADE;
+  ADD CONSTRAINT `pemesanan_detail_ibfk_1` FOREIGN KEY (`pemesanan`) REFERENCES `pemesanan` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`barang_koleksi`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -62,10 +62,12 @@ $totalPages_forget_password = ceil($totalRows_forget_password/$maxRows_forget_pa
 <body>
 <table border="1">
   <tr>
+  	<td>sid</td>
     <td>username</td>
   </tr>
   <?php do { ?>
     <tr>
+      <td><?php echo $row_forget_password['sid']; ?></td>
       <td><?php echo $row_forget_password['username']; ?></td>
     </tr>
     <?php } while ($row_forget_password = mysql_fetch_assoc($forget_password)); ?>
