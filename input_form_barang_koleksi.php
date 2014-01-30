@@ -37,11 +37,9 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-  $insertSQL = sprintf("INSERT INTO barang_koleksi (sid, nama_barang, status, harga, diskon, stock, tipe, gambar) VALUES (uuid(), %s, %s, %s, %s, %s, %s, %s)",
+  $insertSQL = sprintf("INSERT INTO barang_koleksi (sid, nama_barang, harga, stock, tipe, gambar) VALUES (uuid(), %s, %s, %s, %s, %s)",
                        GetSQLValueString($_POST['nama_barang'], "text"),
-                       GetSQLValueString($_POST['status'], "text"),
                        GetSQLValueString($_POST['harga'], "int"),
-                       GetSQLValueString($_POST['diskon'], "int"),
                        GetSQLValueString($_POST['stock'], "int"),
                        GetSQLValueString($_POST['tipe'], "text"),
                        GetSQLValueString($_FILES['gambar']['name'], "text"));
@@ -49,7 +47,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
   
-  #copy file
+   #copy file
     $direktori = 'files/'; //Folder penyimpanan file
     $max_size  = 1000000*10; //Ukuran file maximal 10mb
     $nama_file = $_FILES['gambar']['name']; //Nama file yang akan di Upload
@@ -81,25 +79,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
       <td><input type="text" name="nama_barang" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Status:</td>
-      <td valign="baseline"><table>
-        <tr>
-          <td><input type="radio" name="status" value="member" />
-            member</td>
-        </tr>
-        <tr>
-          <td><input type="radio" name="status" value="bukan member" />
-            bukan member</td>
-        </tr>
-      </table></td>
-    </tr>
-    <tr valign="baseline">
       <td nowrap="nowrap" align="right">Harga:</td>
       <td><input type="text" name="harga" value="" size="32" /></td>
-    </tr>
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Diskon:</td>
-      <td><input type="text" name="diskon" value="" size="32" /></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Stock:</td>
@@ -109,7 +90,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
       <td nowrap="nowrap" align="right">Tipe:</td>
       <td><input type="text" name="tipe" value="" size="32" /></td>
     </tr>
-     <tr valign="baseline">
+    <tr valign="baseline">
       <td nowrap="nowrap" align="right">Gambar:</td>
       
       <td>

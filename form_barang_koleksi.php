@@ -32,10 +32,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_koneksi, $koneksi);
-$query_barang_kolek = "SELECT * FROM barang_koleksi";
-$barang_kolek = mysql_query($query_barang_kolek, $koneksi) or die(mysql_error());
-$row_barang_kolek = mysql_fetch_assoc($barang_kolek);
-$totalRows_barang_kolek = mysql_num_rows($barang_kolek);
+$query_barang_koleks = "SELECT * FROM barang_koleksi";
+$barang_koleks = mysql_query($query_barang_koleks, $koneksi) or die(mysql_error());
+$row_barang_koleks = mysql_fetch_assoc($barang_koleks);
+$totalRows_barang_koleks = mysql_num_rows($barang_koleks);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -49,28 +49,24 @@ $totalRows_barang_kolek = mysql_num_rows($barang_kolek);
   <tr>
     <td>sid</td>
     <td>nama_barang</td>
-    <td>status</td>
     <td>harga</td>
-    <td>diskon</td>
     <td>stock</td>
     <td>tipe</td>
     <td>gambar</td>
   </tr>
   <?php do { ?>
     <tr>
-      <td><?php echo $row_barang_kolek['sid']; ?></td>
-      <td><?php echo $row_barang_kolek['nama_barang']; ?></td>
-      <td><?php echo $row_barang_kolek['status']; ?></td>
-      <td><?php echo $row_barang_kolek['harga']; ?></td>
-      <td><?php echo $row_barang_kolek['diskon']; ?></td>
-      <td><?php echo $row_barang_kolek['stock']; ?></td>
-      <td><?php echo $row_barang_kolek['tipe']; ?></td>
-      <td><?php echo $row_barang_kolek['gambar']; ?></td>
+      <td><?php echo $row_barang_koleks['sid']; ?></td>
+      <td><?php echo $row_barang_koleks['nama_barang']; ?></td>
+      <td><?php echo $row_barang_koleks['harga']; ?></td>
+      <td><?php echo $row_barang_koleks['stock']; ?></td>
+      <td><?php echo $row_barang_koleks['tipe']; ?></td>
+      <td><?php echo $row_barang_koleks['gambar']; ?></td>
     </tr>
-    <?php } while ($row_barang_kolek = mysql_fetch_assoc($barang_kolek)); ?>
+    <?php } while ($row_barang_koleks = mysql_fetch_assoc($barang_koleks)); ?>
 </table>
 </body>
 </html>
 <?php
-mysql_free_result($barang_kolek);
+mysql_free_result($barang_koleks);
 ?>
