@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 28, 2014 at 09:50 PM
+-- Generation Time: Jan 30, 2014 at 03:14 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -81,6 +81,7 @@ INSERT INTO `barang_jenis` (`sid`, `nama_jenis`, `keterangan`) VALUES
 CREATE TABLE IF NOT EXISTS `barang_koleksi` (
   `sid` varchar(36) NOT NULL,
   `nama_barang` char(35) NOT NULL,
+  `status` varchar(36) NOT NULL,
   `harga` int(11) NOT NULL,
   `diskon` int(11) NOT NULL,
   `stock` int(8) NOT NULL,
@@ -93,8 +94,10 @@ CREATE TABLE IF NOT EXISTS `barang_koleksi` (
 -- Dumping data for table `barang_koleksi`
 --
 
-INSERT INTO `barang_koleksi` (`sid`, `nama_barang`, `harga`, `diskon`, `stock`, `tipe`, `gambar`) VALUES
-('561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 'toshiba', 15000, 8, 15, 'accesories', 0x312e706e67);
+INSERT INTO `barang_koleksi` (`sid`, `nama_barang`, `status`, `harga`, `diskon`, `stock`, `tipe`, `gambar`) VALUES
+('2f2fbc69-89b8-11e3-95e1-582c80139263', 'toshiba', 'member', 55, 7, 2, 'computer', 0x53637265656e73686f745f322e706e67),
+('561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 'toshiba', '', 15000, 8, 15, 'accesories', 0x312e706e67),
+('97f080fd-89b8-11e3-95e1-582c80139263', 'flashdisk', 'member', 110000, 7, 2, 'computer', 0x53637265656e73686f745f322e706e67);
 
 -- --------------------------------------------------------
 
@@ -206,7 +209,8 @@ CREATE TABLE IF NOT EXISTS `pemesanan_detail` (
 --
 
 INSERT INTO `pemesanan_detail` (`sid`, `pemesanan`, `barang_koleksi`, `jumlah`) VALUES
-('9f40e95f-8824-11e3-8ba2-e89a8fb9e2bc', '229acc46-8791-11e3-bda0-582c80139263', '561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 6);
+('9f40e95f-8824-11e3-8ba2-e89a8fb9e2bc', '229acc46-8791-11e3-bda0-582c80139263', '561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 6),
+('2fa03fb9-885e-11e3-95d3-582c80139263', '229acc46-8791-11e3-bda0-582c80139263', '561d95d7-87d3-11e3-8ba2-e89a8fb9e2bc', 8);
 
 -- --------------------------------------------------------
 
