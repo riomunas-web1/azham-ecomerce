@@ -64,14 +64,14 @@ $totalPages_pemesanan_detail = ceil($totalRows_pemesanan_detail/$maxRows_pemesan
   <tr>
     <td>sid</td>
     <td>pemesanan</td>
-    <td>barang_koleksi</td>
+    <td>kode_barang</td>
     <td>jumlah</td>
   </tr>
   <?php do { ?>
     <tr>
       <td><?php echo $row_pemesanan_detail['sid']; ?></td>
       <td><?php echo $row_pemesanan_detail['pemesanan']; ?></td>
-      <td><?php echo $row_pemesanan_detail['barang_koleksi']; ?></td>
+      <td><?php echo $row_pemesanan_detail['kode_barang']; ?></td>
       <td><?php echo $row_pemesanan_detail['jumlah']; ?></td>
     </tr>
     <?php } while ($row_pemesanan_detail = mysql_fetch_assoc($pemesanan_detail)); ?>
