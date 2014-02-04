@@ -31,26 +31,11 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
-$maxRows_barang_jenis = 10;
-$pageNum_barang_jenis = 0;
-if (isset($_GET['pageNum_barang_jenis'])) {
-  $pageNum_barang_jenis = $_GET['pageNum_barang_jenis'];
-}
-$startRow_barang_jenis = $pageNum_barang_jenis * $maxRows_barang_jenis;
-
 mysql_select_db($database_koneksi, $koneksi);
 $query_barang_jenis = "SELECT * FROM barang_jenis";
-$query_limit_barang_jenis = sprintf("%s LIMIT %d, %d", $query_barang_jenis, $startRow_barang_jenis, $maxRows_barang_jenis);
-$barang_jenis = mysql_query($query_limit_barang_jenis, $koneksi) or die(mysql_error());
+$barang_jenis = mysql_query($query_barang_jenis, $koneksi) or die(mysql_error());
 $row_barang_jenis = mysql_fetch_assoc($barang_jenis);
-
-if (isset($_GET['totalRows_barang_jenis'])) {
-  $totalRows_barang_jenis = $_GET['totalRows_barang_jenis'];
-} else {
-  $all_barang_jenis = mysql_query($query_barang_jenis);
-  $totalRows_barang_jenis = mysql_num_rows($all_barang_jenis);
-}
-$totalPages_barang_jenis = ceil($totalRows_barang_jenis/$maxRows_barang_jenis)-1;
+$totalRows_barang_jenis = mysql_num_rows($barang_jenis);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

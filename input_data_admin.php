@@ -41,6 +41,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['userid'], "int"),
                        GetSQLValueString($_POST['passid'], "int"));
 
+
+
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 }
@@ -49,7 +51,19 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
   $insertSQL = sprintf("INSERT INTO `admin` (userid, passid) VALUES (%s, %s)",
                        GetSQLValueString($_POST['userid'], "text"),
                        GetSQLValueString($_POST['passid'], "int"));
-
+if (empty($_POST['userid']) || empty($_POST['passid'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_data_admin.php"; 
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_data_admin.php";
+</script>'; 
+		 
+       }  
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 

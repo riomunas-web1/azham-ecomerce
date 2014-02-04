@@ -40,7 +40,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO login (sid, username, password) VALUES (uuid(), %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
-
+					   
+if (empty($_POST['username']) || empty($_POST['password'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_form_login.php";  
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_login.php";
+</script>'; 
+		 
+       }  
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 
@@ -64,11 +77,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   <table align="center">
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Username:</td>
-      <td><input type="text" name="username" value="" maxlength="8" size="32" /></td>
+      <td><input type="text" name="username"  value="" maxlength="8" size="32" /></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Password:</td>
-      <td><input type="password" name="password" value="" maxlength="11" size="32" /></td>
+      <td><input type="password" name="password"  value="" maxlength="11" size="32" /></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>

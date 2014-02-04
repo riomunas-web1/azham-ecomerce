@@ -45,6 +45,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['kode_pos'], "int"),
                        GetSQLValueString($_POST['email'], "text"),
                        GetSQLValueString($_POST['no_telpon'], "text"));
+					   
+if (empty($_POST['nama_pelanggan']) || empty($_POST['alamat'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_pelanggan.php"; 
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_pelanggan.php";
+</script>'; 
+		 
+       }  
+
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
@@ -73,16 +88,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Jenis_kelamin:</td>
-      <td valign="baseline"><table>
-        <tr>
-          <td><input type="radio" name="jenis_kelamin" value="pria" />
-            pria</td>
-        </tr>
-        <tr>
-          <td><input type="radio" name="jenis_kelamin" value="wanita" />
-            wanita</td>
-        </tr>
-      </table></td>
+      <td><select name="jenis_kelamin">
+        <option value="pria" <?php if (!(strcmp("pria", ""))) {echo "pria";} ?>>pria</option>
+        <option value="wanita" <?php if (!(strcmp("wanita", ""))) {echo "wanita";} ?>>wanita</option>
+        </select></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right" valign="top">Alamat:</td>

@@ -64,7 +64,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 //untuk mengecek apakah form password dan form konfirmasi password sudah sama
            if ($password == $confirm){
                $num_row = mysql_query ("SELECT count(*) FROM users WHERE username = '$username'");
-//fungsi script ini adalah untuk mengecek ketersediaan username, jika tidak tersedia maka program akan berjalan
+//fungsi script ini adalah untuk mengecek ketersediaan username, jika tidak tersedia maka program tidak akan berjalan
                if ($num_row ==0) {
                    $password = md5($password);
                    $confirm = md5($confirm);

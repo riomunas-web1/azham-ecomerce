@@ -39,6 +39,20 @@ if (isset($_SERVER['QUERY_STRING'])) {
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO forget_password (sid, username) VALUES (uuid(), %s)",
                        GetSQLValueString($_POST['username'], "text"));
+					   
+if (empty($_POST['username'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_forget_password.php"; 
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_forget_password.php";
+</script>'; 
+		 
+       }  
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());

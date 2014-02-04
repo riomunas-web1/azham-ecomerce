@@ -43,6 +43,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['stock'], "int"),
                        GetSQLValueString($_POST['tipe'], "text"),
                        GetSQLValueString($_FILES['gambar']['name'], "text"));
+					   
+    if (empty($_POST['nama_barang']) || empty($_POST['harga']) || empty($_POST['stock'])| empty($_POST['stock'])| empty($_FILES['gambar']['name'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_form_barang_koleksi.php";  
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_barang_koleksi.php";
+</script>'; 
+		 
+       }  
+
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
@@ -84,8 +99,16 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Stock:</td>
-      <td><input type="text" name="stock" value="" size="32" /></td>
-    </tr>
+      <td><select name="stock">
+        <option value="1" <?php if (!(strcmp("1", ""))) {echo "SELECTED";} ?>>1</option>
+        <option value="2" <?php if (!(strcmp("2", ""))) {echo "SELECTED";} ?>>2</option>
+        <option value="3" <?php if (!(strcmp("3", ""))) {echo "SELECTED";} ?>>3</option>
+        <option value="4" <?php if (!(strcmp("4", ""))) {echo "SELECTED";} ?>>4</option>
+        <option value="5" <?php if (!(strcmp("5", ""))) {echo "SELECTED";} ?>>5</option>
+        <option value="6" <?php if (!(strcmp("6", ""))) {echo "SELECTED";} ?>>6</option>
+        <option value="7" <?php if (!(strcmp("7", ""))) {echo "SELECTED";} ?>>7</option>
+      </select></td>
+    </tr>    
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Tipe:</td>
       <td><input type="text" name="tipe" value="" size="32" /></td>

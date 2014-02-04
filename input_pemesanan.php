@@ -45,6 +45,20 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['biaya_kirim'], "int"),
                        GetSQLValueString($_POST['total_pembayaran'], "int"),
                        GetSQLValueString($_POST['status_kirim'], "text"));
+					   
+if (empty($_POST['nama_pelanggan']) || empty($_POST['alamat'])) {  
+        echo '<script language="javascript">  
+        alert("Data Harus Diisi Semua");  
+        window.location="input_pemesanan.php"; 
+        </script>';  
+         exit(); 
+    }  
+    else {  
+      echo '<script language="javascript">alert("Data Berhasil Disimpan");
+window.location="form_pemesanan.php";
+</script>'; 
+		 
+       }  
 
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
@@ -62,6 +76,24 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<link type="text/css" href="js/themes/base/ui.all.css" rel="stylesheet" /> 
+<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.datepicker.js"></script>
+
+
+<script type="text/javascript"> 
+      $(document).ready(function(){
+        $("#tanggal").datepicker({
+		dateFormat  : "yy-mm-dd", 
+          changeMonth : true,
+          changeYear  : true
+		  
+        });
+      });
+	  
+    </script>
+    
 </head>
 
 <body>
@@ -69,7 +101,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   <table align="center">
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Tanggal:</td>
-      <td><input type="text" name="tanggal" maxlength="10" value="" size="32" /></td>
+      <td><input type="text"  name="tanggal" id="tanggal" size="32"/></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Jam:</td>
@@ -77,16 +109,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Status_bayar:</td>
-      <td valign="baseline"><table>
-        <tr>
-          <td><input type="radio" name="status_bayar" value="S" />
-            S</td>
-        </tr>
-        <tr>
-          <td><input type="radio" name="status_bayar" value="B" />
-            B</td>
-        </tr>
-      </table></td>
+      <td><select name="status_bayar">
+        <option value="sudah" <?php if (!(strcmp("sudah", ""))) {echo "SELECTED";} ?>>sudah</option>
+        <option value="belum" <?php if (!(strcmp("belum", ""))) {echo "SELECTED";} ?>>belum</option>
+       </select></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Total_harga:</td>
@@ -102,16 +128,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Status_kirim:</td>
-      <td valign="baseline"><table>
-        <tr>
-          <td><input type="radio" name="status_kirim" value="D" />
-            D</td>
-        </tr>
-        <tr>
-          <td><input type="radio" name="status_kirim" value="P" />
-            P</td>
-        </tr>
-      </table></td>
+      <td><select name="status_kirim">
+        <option value="delivered" <?php if (!(strcmp("delivered", ""))) {echo "SELECTED";} ?>>delivered</option>
+        <option value="pending" <?php if (!(strcmp("pending", ""))) {echo "SELECTED";} ?>>pending</option>
+       </select></td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">&nbsp;</td>
