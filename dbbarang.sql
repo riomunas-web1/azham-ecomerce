@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 4.0.6deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 04, 2014 at 07:20 PM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Feb 07, 2014 at 01:32 AM
+-- Server version: 5.5.34-0ubuntu0.13.04.1
+-- PHP Version: 5.5.3-1ubuntu2
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,11 +33,6 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `admin`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -50,11 +46,6 @@ CREATE TABLE IF NOT EXISTS `barang_jenis` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `barang_jenis`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -66,23 +57,11 @@ CREATE TABLE IF NOT EXISTS `barang_koleksi` (
   `nama_barang` char(35) NOT NULL,
   `harga` int(11) NOT NULL,
   `stock` int(8) NOT NULL,
-  `tipe` char(15) NOT NULL,
-  `gambar` blob NOT NULL,
-  PRIMARY KEY (`sid`)
+  `barang_jenis` varchar(36) DEFAULT NULL,
+  `gambar` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`sid`),
+  KEY `barang_jenis` (`barang_jenis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `barang_koleksi`
---
-
-INSERT INTO `barang_koleksi` (`sid`, `nama_barang`, `harga`, `stock`, `tipe`, `gambar`) VALUES
-('36f62880-8d6e-11e3-b3d8-e89a8fb9e2bc', 'terlalu', 55, 3, '47500', 0x312e706e67),
-('4f2fd3a9-8d6e-11e3-b3d8-e89a8fb9e2bc', 'terlalugg', 55, 3, '47500', 0x312e706e67),
-('64ca65af-8d6f-11e3-b3d8-e89a8fb9e2bc', 'terlalufa', 55, 3, '47500', 0x312e706e67),
-('8f4dd371-8d6e-11e3-b3d8-e89a8fb9e2bc', 'terlalufa', 55, 3, '47500', 0x312e706e67),
-('ccda0910-8d6e-11e3-b3d8-e89a8fb9e2bc', 'terlalufa', 55, 3, '47500', 0x312e706e67),
-('e69dfc3a-8d79-11e3-98fa-e89a8fb9e2bc', 'toshiba', 55, 3, '47500', 0x312e706e67),
-('ebf67c76-8d7a-11e3-98fa-e89a8fb9e2bc', 'array', 55, 1, '47500', 0x53637265656e73686f745f322e706e67);
 
 -- --------------------------------------------------------
 
@@ -95,14 +74,6 @@ CREATE TABLE IF NOT EXISTS `forget_password` (
   `username` varchar(8) NOT NULL,
   KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `forget_password`
---
-
-INSERT INTO `forget_password` (`sid`, `username`) VALUES
-('e09c988e-87d3-11e3-8ba2-e89a8fb9e2bc', 'kami'),
-('bf5b92ec-8d89-11e3-98fa-e89a8fb9e2bc', 'kami');
 
 -- --------------------------------------------------------
 
@@ -117,16 +88,6 @@ CREATE TABLE IF NOT EXISTS `login` (
   KEY `username` (`username`),
   KEY `password` (`password`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`sid`, `username`, `password`) VALUES
-('8d731e38-87d3-11e3-8ba2-e89a8fb9e2bc', 'kami', 'dadah'),
-('cf200e07-8d87-11e3-98fa-e89a8fb9e2bc', 'kami', 'fa'),
-('e4a5d9ce-8d88-11e3-98fa-e89a8fb9e2bc', 'kami', 'dada'),
-('fce77edd-8d99-11e3-98fa-e89a8fb9e2bc', 'kami', 'fafa');
 
 -- --------------------------------------------------------
 
@@ -146,17 +107,6 @@ CREATE TABLE IF NOT EXISTS `pelanggan` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pelanggan`
---
-
-INSERT INTO `pelanggan` (`sid`, `nama_pelanggan`, `jenis_kelamin`, `alamat`, `kota`, `kode_pos`, `email`, `no_telpon`) VALUES
-('1793aafb-8d8d-11e3-98fa-e89a8fb9e2bc', 'dada', 'pria', 'aaaaaaaaa', 'dddd', 83611, 'azhamcool@yahoo.com', '+6281918211444'),
-('2175f936-8d8d-11e3-98fa-e89a8fb9e2bc', '656565', 'pria', 'aaaaaaaaa', 'dddd', 83611, 'azhamcool@yahoo.com', '+6281918211444'),
-('b0977af4-8792-11e3-bda0-582c80139263', 'azham', 'pria', 'adada', 'dddd', 83611, 'azhamcool@yahoo.com', '+6281918211444'),
-('e2490ffc-8790-11e3-bda0-582c80139263', 'azham', 'pria', 'aaaaaaaaaa', 'dadada', 83611, 'azhamcool@yahoo.com', '+6281918211444'),
-('f162f510-8d8b-11e3-98fa-e89a8fb9e2bc', 'azham', 'pria', 'pancor', 'selong', 83611, 'azhamcool@yahoo.com', '+6281918211444');
-
 -- --------------------------------------------------------
 
 --
@@ -175,14 +125,6 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `pemesanan`
---
-
-INSERT INTO `pemesanan` (`sid`, `tanggal`, `jam`, `status_bayar`, `total_harga`, `biaya_kirim`, `total_pembayaran`, `status_kirim`) VALUES
-('3bf26473-8d91-11e3-98fa-e89a8fb9e2bc', '2014-02-05', '11:54:00', 'S', 150000, 5000, 155000, 'D'),
-('783ac47e-8d58-11e3-b3d8-e89a8fb9e2bc', '1999-09-04', '11:54:00', 'S', 150000, 5000, 155000, 'D');
-
 -- --------------------------------------------------------
 
 --
@@ -197,11 +139,6 @@ CREATE TABLE IF NOT EXISTS `pemesanan_detail` (
   KEY `pemesanan` (`pemesanan`),
   KEY `kode_barang` (`kode_barang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pemesanan_detail`
---
-
 
 -- --------------------------------------------------------
 
@@ -222,15 +159,14 @@ CREATE TABLE IF NOT EXISTS `register` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `register`
---
-
-INSERT INTO `register` (`sid`, `username`, `email`, `password`, `confirm password`, `alamat`, `no_telpon`, `keterangan`) VALUES
-('6ff7d2b8-8790-11e3-bda0-582c80139263', 'kami', 'azhamcool@yahoo.com', 'dadah', 'dadah1', 'aaaaaaaaaaaaa', '+6281918211444', 'ddddddddd');
-
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `barang_koleksi`
+--
+ALTER TABLE `barang_koleksi`
+  ADD CONSTRAINT `barang_koleksi_ibfk_1` FOREIGN KEY (`barang_jenis`) REFERENCES `barang_jenis` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `forget_password`
@@ -250,3 +186,7 @@ ALTER TABLE `login`
 ALTER TABLE `pemesanan_detail`
   ADD CONSTRAINT `pemesanan_detail_ibfk_1` FOREIGN KEY (`pemesanan`) REFERENCES `pemesanan` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
