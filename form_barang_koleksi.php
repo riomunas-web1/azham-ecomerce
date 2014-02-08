@@ -31,6 +31,10 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+session_start();
+
+$_SESSION['nama'] = 'rio berliandinata munas';
+
 mysql_select_db($database_koneksi, $koneksi);
 $query_barang_koleks = "
     SELECT 
