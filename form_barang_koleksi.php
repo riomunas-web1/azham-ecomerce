@@ -32,7 +32,17 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_koneksi, $koneksi);
-$query_barang_koleks = "SELECT * FROM barang_koleksi";
+$query_barang_koleks = "
+    SELECT 
+        barang_koleksi.sid sid,
+        nama_barang,
+        harga,
+        stock,
+        nama_jenis,
+        gambar
+    FROM barang_koleksi
+    LEFT JOIN barang_jenis ON barang_koleksi.barang_jenis = barang_jenis.sid
+";
 $barang_koleks = mysql_query($query_barang_koleks, $koneksi) or die(mysql_error());
 $row_barang_koleks = mysql_fetch_assoc($barang_koleks);
 $totalRows_barang_koleks = mysql_num_rows($barang_koleks);
@@ -60,7 +70,7 @@ $totalRows_barang_koleks = mysql_num_rows($barang_koleks);
       <td><?php echo $row_barang_koleks['nama_barang']; ?></td>
       <td><?php echo $row_barang_koleks['harga']; ?></td>
       <td><?php echo $row_barang_koleks['stock']; ?></td>
-      <td><?php echo $row_barang_koleks['tipe']; ?></td>
+      <td><?php echo $row_barang_koleks['nama_jenis']; ?></td>
       <td><?php echo $row_barang_koleks['gambar']; ?></td>
     </tr>
     <?php } while ($row_barang_koleks = mysql_fetch_assoc($barang_koleks)); ?>
