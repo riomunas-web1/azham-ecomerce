@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.6deb1
+-- version 3.5.8.1deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 07, 2014 at 01:32 AM
+-- Generation Time: Feb 08, 2014 at 02:29 PM
 -- Server version: 5.5.34-0ubuntu0.13.04.1
--- PHP Version: 5.5.3-1ubuntu2
+-- PHP Version: 5.4.9-4ubuntu2.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -54,13 +54,12 @@ CREATE TABLE IF NOT EXISTS `barang_jenis` (
 
 CREATE TABLE IF NOT EXISTS `barang_koleksi` (
   `sid` varchar(36) NOT NULL,
-  `nama_barang` char(35) NOT NULL,
+  `nama_barang` varchar(35) NOT NULL,
   `harga` int(11) NOT NULL,
   `stock` int(8) NOT NULL,
-  `barang_jenis` varchar(36) DEFAULT NULL,
-  `gambar` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`sid`),
-  KEY `barang_jenis` (`barang_jenis`)
+  `barang_jenis` varchar(36) NOT NULL,
+  `gambar` varchar(255) NOT NULL,
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -161,12 +160,6 @@ CREATE TABLE IF NOT EXISTS `register` (
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `barang_koleksi`
---
-ALTER TABLE `barang_koleksi`
-  ADD CONSTRAINT `barang_koleksi_ibfk_1` FOREIGN KEY (`barang_jenis`) REFERENCES `barang_jenis` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `forget_password`
