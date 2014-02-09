@@ -40,6 +40,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO login (sid, username, password) VALUES (uuid(), %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
+session_start();
+if(isset($_SESSION['username'])) {
+header('location:index.php'); }
+
 					   
 if (empty($_POST['username']) || empty($_POST['password'])) {  
         echo '<script language="javascript">  
@@ -49,11 +53,11 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
          exit(); 
     }  
     else {  
-      echo '<script language="javascript">alert("Data Berhasil Disimpan");
-window.location="form_login.php";
-</script>'; 
+     
+
 		 
        }  
+
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 
@@ -64,15 +68,17 @@ window.location="form_login.php";
   }
   header(sprintf("Location: %s", $insertGoTo));
 }
+
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 </head>
-
 <body>
+
 <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
   <table align="center">
     <tr valign="baseline">
