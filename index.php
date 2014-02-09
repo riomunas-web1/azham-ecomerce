@@ -19,9 +19,7 @@ echo $_SESSION['username'];
 </head>
 <body>
 <center>
-<?php
-echo "<h2>Selamat Datang, $username </h2>";
-?>
+
 <a href="logout.php"><b>Logout</a>
 </center>
 </body>
