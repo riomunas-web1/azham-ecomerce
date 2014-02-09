@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_sid'])) {
 <html>
     <h2>Selamat Datang</h2>
 
-    <?php echo $_SESSION['username']; ?>
+    <?php echo $_SESSION['user_sid']; ?>
 
     <head>
         <title>Home </title>
