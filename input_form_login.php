@@ -40,7 +40,14 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO login (sid, username, password) VALUES (uuid(), %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
-session_start(); $_SESSION['username'] = "azham11"; echo $_SESSION['username']; echo "<a href='index.php'>selamat datang</a>";
+ session_start();
+      session_register("username");
+      session_register("password");
+      $_SESSION[username]     = $r[username];
+      $_SESSION[password]     = $r[password];
+      header('location:index.php');
+    }
+    else{ echo "LOGIN GAGAL! <br> <a href='index.php'><< Kembali</a>"; 
 
 					   
 if (empty($_POST['username']) || empty($_POST['password'])) {  
