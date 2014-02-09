@@ -1,27 +1,21 @@
 <?php
 session_start();
-
-if(!isset($_SESSION['username'])){
-    //jika session belum di set/register
-    header("Location: input_form_login.php");
-    // die("Anda belum register kan session");
-}
-
 //jika sudah register kita lanjut
 ?>
-<h2>Selamat Datang</h2>
 
-<?php
-echo $_SESSION['username'];
-?>
 <html>
-<head>
-<title>Halaman Sukses Login</title>
-</head>
-<body>
-<center>
+    <h2>Selamat Datang</h2>
 
-<a href="logout.php"><b>Logout</a>
-</center>
+    <?php echo $_SESSION['username']; ?>
+
+    <head>
+        <title>Home </title>
+    </head>
+    <body>
+    <center>
+        <?php if (isset($_SESSION['user_sid'])) :?>
+            <a href="logout.php"><b>Logout</a>
+        <?php endif; ?>
+    </center>
 </body>
 </html>
