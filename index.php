@@ -1,12 +1,17 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])) {
-header('location:login.php'); }
-else { $username = $_SESSION['username']; }
-require_once("Connections/koneksi.php");
 
-$query = mysql_query("SELECT * FROM user WHERE username = '$username'");
-$hasil = mysql_fetch_array($query);
+if(!isset($_SESSION['username'])){
+    //jika session belum di set/register
+    die("Anda belum register kan session");
+}
+
+//jika sudah register kita lanjut
+?>
+<h2>Selamat Datang</h2>
+
+<?php
+echo $_SESSION['username'];
 ?>
 <html>
 <head>

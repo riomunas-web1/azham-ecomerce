@@ -40,9 +40,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   $insertSQL = sprintf("INSERT INTO login (sid, username, password) VALUES (uuid(), %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
                        GetSQLValueString($_POST['password'], "text"));
-session_start();
-if(isset($_SESSION['username'])) {
-header('location:index.php'); }
+session_start(); $_SESSION['namauser'] = "azham11"; echo $_SESSION['namauser']; echo "<a href='index.php'>selamat datang</a>";
 
 					   
 if (empty($_POST['username']) || empty($_POST['password'])) {  
@@ -61,7 +59,7 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
   mysql_select_db($database_koneksi, $koneksi);
   $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
 
-  $insertGoTo = "form_login.php";
+  $insertGoTo = "index.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
     $insertGoTo .= $_SERVER['QUERY_STRING'];
