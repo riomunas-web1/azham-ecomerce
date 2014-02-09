@@ -38,8 +38,8 @@ if (isset($_SERVER['QUERY_STRING'])) {
 }
 
 $message = "";
-//if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
-if (($_POST["MM_insert"] == "form1")) {
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
+//if (($_POST["MM_insert"] == "form1")) {
     //cek ke database
     $sql = sprintf("select * from register where username = %s and password = %s", 
             GetSQLValueString($_POST['username'], "text"),
