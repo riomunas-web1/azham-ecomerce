@@ -3,7 +3,8 @@ session_start();
 
 if(!isset($_SESSION['username'])){
     //jika session belum di set/register
-    die("Anda belum register kan session");
+    header("Location: input_form_login.php");
+    // die("Anda belum register kan session");
 }
 
 //jika sudah register kita lanjut
