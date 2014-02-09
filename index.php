@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user_sid'])) {
+    //jika session belum di set/register
+    header("Location: input_form_login.php");
+    // die("Anda belum register kan session");
+}
+
 //jika sudah register kita lanjut
 ?>
 
@@ -13,9 +20,7 @@ session_start();
     </head>
     <body>
     <center>
-        <?php if (isset($_SESSION['user_sid'])) :?>
             <a href="logout.php"><b>Logout</a>
-        <?php endif; ?>
     </center>
 </body>
 </html>
