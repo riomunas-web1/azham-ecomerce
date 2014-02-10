@@ -33,7 +33,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 $currentPage = $_SERVER["PHP_SELF"];
 
-$maxRows_form_barang_koleksi = 1;
+$maxRows_form_barang_koleksi = 10;
 $pageNum_form_barang_koleksi = 0;
 if (isset($_GET['pageNum_form_barang_koleksi'])) {
   $pageNum_form_barang_koleksi = $_GET['pageNum_form_barang_koleksi'];
@@ -91,7 +91,27 @@ if (!isset($_SESSION['user_sid'])) {
     </head>
     <body>
     <center>
-            <a href="logout.php">
+            <a href="logout.php"><b>Logout</a>
+            <table border="1">
+              <tr>
+                <td>sid</td>
+                <td>nama_barang</td>
+                <td>harga</td>
+                <td>stock</td>
+                <td>barang_jenis</td>
+                <td>gambar</td>
+              </tr>
+              <?php do { ?>
+                <tr>
+                  <td><?php echo $row_form_barang_koleksi['sid']; ?></td>
+                  <td><?php echo $row_form_barang_koleksi['nama_barang']; ?></td>
+                  <td><?php echo $row_form_barang_koleksi['harga']; ?></td>
+                  <td><?php echo $row_form_barang_koleksi['stock']; ?></td>
+                  <td><?php echo $row_form_barang_koleksi['barang_jenis']; ?></td>
+                  <td><?php echo $row_form_barang_koleksi['gambar']; ?></td>
+                </tr>
+                <?php } while ($row_form_barang_koleksi = mysql_fetch_assoc($form_barang_koleksi)); ?>
+            </table>
             <table border="0">
               <tr>
                 <td><?php if ($pageNum_form_barang_koleksi > 0) { // Show if not first page ?>
@@ -108,7 +128,6 @@ if (!isset($_SESSION['user_sid'])) {
                     <?php } // Show if not last page ?></td>
               </tr>
             </table>
-            <b>Logout</a>
     </center>
 </body>
 </html>
