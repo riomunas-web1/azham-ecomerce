@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `register` (
   `alamat` varchar(45) NOT NULL,
   `no_telpon` varchar(100) NOT NULL,
   `keterangan` varchar(100) NOT NULL,
-  PRIMARY KEY (`username`)
+  PRIMARY KEY (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -165,13 +165,13 @@ CREATE TABLE IF NOT EXISTS `register` (
 -- Constraints for table `forget_password`
 --
 ALTER TABLE `forget_password`
-  ADD CONSTRAINT `forget_password_ibfk_1` FOREIGN KEY (`username`) REFERENCES `register` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `forget_password_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `register` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `login`
 --
 ALTER TABLE `login`
-  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`username`) REFERENCES `register` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `register` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pemesanan_detail`
