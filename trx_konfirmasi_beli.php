@@ -50,21 +50,54 @@ if (isset($_GET['sid'])) {
 <?php
 //qty yang sudah ada di sesssion
 if (!isset($_SESSION['keranjang'])) {
-      $_SESSION['keranjang'] = array();
-  }
+    $_SESSION['keranjang'] = array();
+}
 
-  //cek apakah sid sudah ada di session
-  //kalau sudah ada update qty yang ada
-  $is_id_exist = false;
-  $exist_qty = 0;
-  foreach ($_SESSION['keranjang'] as $keranjang => $item) {
-      if ($sid == $item['sid']) {
-          $exist_qty = $item['qty'];
-          $is_id_exist = true;
-          break;
-      }
-  }
+//cek apakah sid sudah ada di session
+//kalau sudah ada update qty yang ada
+$is_id_exist = false;
+$exist_qty = 0;
+foreach ($_SESSION['keranjang'] as $keranjang => $item) {
+    if ($sid == $item['sid']) {
+        $exist_qty = $item['qty'];
+        $is_id_exist = true;
+        break;
+    }
+}
+
+if (isset($_POST['qty'])) {
+    $qty = $_POST['qty'];
+    if ($qty > 0) {
+        if (!isset($_SESSION['keranjang'])) {
+            $_SESSION['keranjang'] = array();
+        }
+
+        //cek apakah sid sudah ada di session
+        //kalau sudah ada update qty yang ada
+        $is_id_exist = false;
+        foreach ($_SESSION['keranjang'] as $keranjang => &$item) {
+            if ($sid == $item['sid']) {
+                $item['qty'] = $qty;
+                $is_id_exist = true;
+                break;
+            }
+        }
+
+        if (!$is_id_exist) {
+            array_push($_SESSION['keranjang'], array(
+                'sid' => $sid,
+                'qty' => $qty
+                    )
+            );
+        }
+        header("Location:index.php");
+    } else {
+        echo "<p>Quantity barang harus lebih besar dari 0</p>";
+    }
+}
 ?>
+
+
 <form action="" method="POST">
     Nama barang : <?php echo $nama_barang ?> <br/>
     Harga : <?php echo $harga ?> <br/>
@@ -73,32 +106,3 @@ if (!isset($_SESSION['keranjang'])) {
     <button type="submit">Beli</button>
     <input type="hidden" name="sid" value="<?php echo $sid ?>"
 </form>
-
-<?php
-if (isset($_POST['qty'])) {
-    $qty = $_POST['qty'];
-    if (!isset($_SESSION['keranjang'])) {
-        $_SESSION['keranjang'] = array();
-    }
-
-    //cek apakah sid sudah ada di session
-    //kalau sudah ada update qty yang ada
-    $is_id_exist = false;
-    foreach ($_SESSION['keranjang'] as $keranjang => &$item) {
-        if ($sid == $item['sid']) {
-            $item['qty'] = $qty;
-            $is_id_exist = true;
-            break;
-        }
-    }
-
-    if (!$is_id_exist) {
-        array_push($_SESSION['keranjang'], array(
-            'sid' => $sid,
-            'qty' => $qty
-                )
-        );
-    }
-    header("Location:index.php");
-}
-?>
