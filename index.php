@@ -139,6 +139,10 @@ $queryString_form_barang_koleksi = sprintf("&totalRows_form_barang_koleksi=%d%s"
                     <?php } // Show if not last page   ?></td>
             </tr>
         </table>
+        
+
+<a href="index.php/?jenis=jenis_1">Computer</a>
+
     </center>
     
     <hr/>

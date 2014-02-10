@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_form_barang_koleksi" value="name:sid;datatype:string,name:nama_barang;datatype:string,name:harga;datatype:int,name:stock;datatype:int,name:barang_jenis;datatype:string,name:gambar;datatype:string" />
+</info>
