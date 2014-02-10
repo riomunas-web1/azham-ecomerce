@@ -1,0 +1,12 @@
+1. 	tampilkan barang berdasarkan barang_jenis & dibuat paging
+	< user pilih barang n qty yang diinginkan
+
+2.	setelah selesai user masuk halaman pembayaran (harus login)
+	tampilkan detail pemesanan dan total yang harus dibayarkan
+
+3.	< user melakukan pembayaran
+	lanjut ke halaman konfirmasi pembayaran
+	kirim email detail pesanan n jumlah pembayaran ke email client
+
+4. 	kalau sudah kirim n ada resinya kirim nomor resi ke email client
+
