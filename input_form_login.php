@@ -41,11 +41,14 @@ $message = "";
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 //if (($_POST["MM_insert"] == "form1")) {
     //cek ke database
+    mysql_select_db($database_koneksi, $koneksi);
     $sql = sprintf("select * from register where username = %s and password = %s", 
             GetSQLValueString($_POST['username'], "text"),
-            GetSQLValueString($_POST['password'], "text"));
-    $rows = mysql_fetch_object($result);
-    $result = mysql_query($sql);
+            GetSQLValueString($_POST['password'], "text"));    
+    
+    $result = mysql_query($sql, $koneksi) or die(mysql_error());
+    
+//    $rows = mysql_fetch_object($result);
     if (mysql_num_rows($result) == 1) {
         echo 'asdf';
         $register = mysql_fetch_object($result);
