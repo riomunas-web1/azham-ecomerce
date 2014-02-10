@@ -71,7 +71,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                    mysql_select_db($database_koneksi, $koneksi);
 
                    $Result1 = mysql_query($insertSQL, $koneksi) or die(mysql_error());
-                   $sql_insert = mysql_query("INSERT INTO users VALUES ('','$username','$password','$confirm')");
+                   $sql_insert = mysql_query("INSERT INTO users VALUES (uuid(),'$username','$password','$confirm')");
                    // echo "Pendaftaran berhasil. Login <a href='koneksi.php'>disini</a>";
                    // exit();
                    
