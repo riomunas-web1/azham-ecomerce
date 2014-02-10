@@ -50,7 +50,6 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
     
 //    $rows = mysql_fetch_object($result);
     if (mysql_num_rows($result) == 1) {
-        echo 'asdf';
         $register = mysql_fetch_object($result);
         session_start();
         $message = "";

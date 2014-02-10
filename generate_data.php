@@ -39,7 +39,7 @@ while($row = mysql_fetch_assoc($result)) {
 	$first = false;
 	for($i=0; $i<100; $i++) {
 		$harga = ($i*100)+1000;
-		$sql .= ($i==0?"":", ")."(uuid(), 'barang $i', $harga, 10, '".$row['sid'] ."') ";
+		$sql .= ($i==0?"":", ")."(uuid(), 'barang ".$row['nama_jenis']." $i', $harga, 10, '".$row['sid'] ."') ";
 	}
 }
 
