@@ -36,16 +36,12 @@ if (!function_exists("GetSQLValueString")) {
 $currentPage = $_SERVER["PHP_SELF"];
 
 
-if (isset($_GET['cat']) && $_GET['cat'] != 0) {
+if (isset($_GET['cat']) && $_GET['cat'] != "0") {
     $cat = $_GET['cat'];
-    $_SESSION['cat'] = $cat;
+    $_SESSION['cat'] = $_GET['cat'];
 } else {
     unset($_SESSION['cat']);
-//    if (isset($_SESSION['cat'])) {
-//        $cat = $_SESSION['cat'];
-//    } else {
     $cat = "0";
-//    }
 }
 
 $maxRows_form_barang_koleksi = 10;
