@@ -8,14 +8,14 @@ mysql_select_db($database_koneksi, $koneksi);
 
 
 $result = mysql_query("SET FOREIGN_KEY_CHECKS=0;", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate barang_jenis", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate barang_koleksi", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate forget_password", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate pelanggan", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate pemesanan", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate pemesanan_detail", $koneksi) or die (mysql_error());
-$result = mysql_query("truncate barang_koleksi", $koneksi) or die (mysql_error());
-$result = mysql_query("SET FOREIGN_KEY_CHECKS=1", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate barang_jenis;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate barang_koleksi;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate forget_password;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate pelanggan;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate pemesanan;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate pemesanan_detail;", $koneksi) or die (mysql_error());
+$result = mysql_query("truncate barang_koleksi;", $koneksi) or die (mysql_error());
+$result = mysql_query("SET FOREIGN_KEY_CHECKS=1;", $koneksi) or die (mysql_error());
 
 //generate data barang_jenis
 $sql = "insert into barang_jenis (sid, nama_jenis, keterangan) values ";
