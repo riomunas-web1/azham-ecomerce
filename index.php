@@ -171,7 +171,6 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
         </table>
         
 
-<a href="index.php/?jenis=jenis_1">Computer</a>
 
     </center>
 
