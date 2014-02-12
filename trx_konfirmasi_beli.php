@@ -1,6 +1,15 @@
 <?php
 require_once('Connections/koneksi.php');
 session_start();
+
+if (!isset($_GET['caller'])) {
+    if (isset($_SESSION['caller'])) {
+        unset($_SESSION['caller']);
+    }
+} else {
+    $_SESSION['caller'] = $_GET['caller'];
+}
+
 if (!function_exists("GetSQLValueString")) {
 
     function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") {
@@ -90,7 +99,11 @@ if (isset($_POST['qty'])) {
                     )
             );
         }
-        header("Location:index.php");
+        if (isset($_SESSION['caller'])) {
+            header(sprintf("Location:%s", $_SESSION['caller']));
+        } else {
+            header("Location:index.php");
+        }
     } else {
         echo "<p>Quantity barang harus lebih besar dari 0</p>";
     }
@@ -103,6 +116,14 @@ if (isset($_POST['qty'])) {
     Harga : <?php echo $harga ?> <br/>
     Jumlah pesanan : <input name="qty" type="number" maxlength="3" style="width: 30px" 
                             value="<?php echo isset($_POST['qty']) ? $_POST['qty'] : $exist_qty ?>"/>
-    <button type="submit">Beli</button>
+                            <?php
+                            $btn_label = "";
+                            if (isset($_SESSION['caller'])) {
+                                $btn_label = "Update";
+                            } else {
+                                $btn_label = "Beli";
+                            }
+                            ?>
+    <button type="submit"><?php echo $btn_label ?></button>
     <input type="hidden" name="sid" value="<?php echo $sid ?>"
 </form>
