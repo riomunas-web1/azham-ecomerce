@@ -2,7 +2,18 @@
 require_once('Connections/koneksi.php');
 session_start();
 
-if (!isset($_POST['checkout'])) {    
+if (!isset($_SESSION['register_sid'])) {
+    $_SESSION['caller'] = 'trx_pembayaran.php';
+    header("Location:input_form_login.php");
+}
+
+//kalau keranjang belum ada kembalikan ke halaman index.php
+if (!isset($_SESSION['keranjang']))
+    header("Location:index.php");
+
+$total = 0;
+
+if (!isset($_POST['checkout'])) {
     ?>
     <form method="post" action="">
         <table border="1">
@@ -13,7 +24,6 @@ if (!isset($_POST['checkout'])) {
                     <td>Qty</td>
                     <td colspan="2">Jumlah</td>
                 </tr><?php
-                $total = 0;
                 foreach ($_SESSION['keranjang'] as $item) {
                     mysql_select_db($database_koneksi, $koneksi);
                     $query = sprintf(
@@ -32,7 +42,8 @@ if (!isset($_POST['checkout'])) {
                         <td>Rp. </td>
                         <td style="text-align: right"><?php echo number_format((int) $item['qty'] * $barang_koleksi['harga'], 0, ',', '.') ?></td>
                     </tr>
-                    <?php $total = $total + (int) $item['qty'] * $barang_koleksi['harga'];
+                    <?php
+                    $total = $total + (int) $item['qty'] * $barang_koleksi['harga'];
                 }
                 ?>
                 <tr>
@@ -48,8 +59,16 @@ if (!isset($_POST['checkout'])) {
     </form>
     <?php
 } else {
-    echo 'Pesanan sudah disimpan <br/>';
-    echo 'Silakan melakukan pembayaran dan konfirmasi pembayaran <br/>';
-    echo '<a href="index.php">Kembali ke halaman awal</a>';
+    $sql = sprintf("insert INTO pemesanan (sid, tanggal, total_harga, register) values (uuid(), now(), %d, '%s')", $total, $_SESSION['register_sid']);
+    $result = mysql_query($sql, $koneksi);
+
+    if ($result == 1) {
+        unset($_SESSION['keranjang']);
+        echo 'Pesanan sudah disimpan <br/>';
+        echo 'Silakan melakukan pembayaran dan konfirmasi pembayaran <br/>';
+        echo '<a href="index.php">Kembali ke halaman awal</a>';
+    } else {
+        echo "Gagal menyimpan pesanan";
+    }
 }
 ?>
