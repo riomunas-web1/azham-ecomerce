@@ -3,7 +3,7 @@ require_once('Connections/koneksi.php');
 session_start();
 
 if (!isset($_SESSION['register_sid'])) {
-    $_SESSION['caller'] = 'trx_pembayaran.php';
+    $_SESSION['caller'] = 'trx_checkout.php';
     header("Location:input_form_login.php");
 }
 
@@ -58,12 +58,28 @@ if (!isset($_POST['checkout'])) {
         <button type="submit" name="checkout">Checkout</button>
     </form>
     <?php
-} else {
+} else {    
+    //input data ke pemesanan
     $sql = sprintf("insert INTO pemesanan (sid, tanggal, total_harga, register) values (uuid(), now(), %d, '%s')", $total, $_SESSION['register_sid']);
-    $result = mysql_query($sql, $koneksi);
+    mysql_select_db($database_koneksi, $koneksi);
+    $result = mysql_query($sql, $koneksi) or die(mysql_error());
+    $sid = mysql_insert_id();
+    echo $sid;
+    
+    //input data ke detail pemesanan
+    $sql = "insert INTO pemesanan_detail (sid, pemesanan, kode_barang, jumlah) values";
+    $first = true;
+    print_r($_SESSION['keranjang']);
+    print_r($sid);
+    
+    foreach ($_SESSION['keranjang'] as $item) {
+        $sql = $sql. ($first)?"":",".'( uuid(), $sid, $item["sid"], $item["qty"])';
+    }
+    
+    echo $sql;
 
     if ($result == 1) {
-        unset($_SESSION['keranjang']);
+//        unset($_SESSION['keranjang']);
         echo 'Pesanan sudah disimpan <br/>';
         echo 'Silakan melakukan pembayaran dan konfirmasi pembayaran <br/>';
         echo '<a href="index.php">Kembali ke halaman awal</a>';

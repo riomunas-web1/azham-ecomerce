@@ -110,7 +110,8 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
 <!--            <a href="<?php printf("%s?cat=%s%s", $currentPage, 'all', $queryString_form_barang_koleksi); ?>">All</a>-->
         ]
 
-        [ <a href="trx_pembayaran.php">Pembayaran</a> ]
+        [ <a href="trx_checkout.php">Checkout</a> ]
+        [ <a href="trx_konfirmasi_pembayaran.php">Konfirmasi Pembayaran</a> ]
 
 
 
