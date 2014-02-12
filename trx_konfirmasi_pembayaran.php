@@ -11,18 +11,7 @@ if (!isset($_POST['submit'])) {
                     <td colspan="2">@harga</td>
                     <td>Qty</td>
                     <td colspan="2">Jumlah</td>
-                </tr><?php
-                $total = 0;
-                foreach ($_SESSION['keranjang'] as $item) {
-                    mysql_select_db($database_koneksi, $koneksi);
-                    $query = sprintf(
-                            "select * "
-                            . "from barang_koleksi "
-                            . "left join barang_jenis on barang_koleksi.barang_jenis = barang_jenis.sid "
-                            . "where barang_koleksi.sid = '%s'", $item['sid']);
-                    $result = mysql_query($query) or die(mysql_error());
-                    $barang_koleksi = mysql_fetch_array($result);
-                    ?>
+                </tr>
                     <tr>
                         <td><?php echo $barang_koleksi['nama_barang'] ?></td>
                         <td>Rp. </td>
@@ -31,9 +20,7 @@ if (!isset($_POST['submit'])) {
                         <td>Rp. </td>
                         <td style="text-align: right"><?php echo number_format((int) $item['qty'] * $barang_koleksi['harga'], 0, ',', '.') ?></td>
                     </tr>
-                    <?php $total = $total + (int) $item['qty'] * $barang_koleksi['harga'];
-                }
-                ?>
+                    
                 <tr>
                     <td colspan="4" style="text-align: right">Total : </td>
                     <td >Rp. </td>

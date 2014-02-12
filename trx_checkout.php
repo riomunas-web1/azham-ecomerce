@@ -8,8 +8,14 @@ if (!isset($_SESSION['register_sid'])) {
 }
 
 //kalau keranjang belum ada kembalikan ke halaman index.php
-if (!isset($_SESSION['keranjang']))
+if (!isset($_SESSION['keranjang'])) {
     header("Location:index.php");
+} else {
+    if (count($_SESSION['keranjang']) ==0 ) {
+        unset($_SESSION['keranjang']);
+        header("Location:index.php");
+    }
+}
 
 $total = 0;
 
@@ -23,6 +29,7 @@ if (!isset($_POST['checkout'])) {
                     <td colspan="2">@harga</td>
                     <td>Qty</td>
                     <td colspan="2">Jumlah</td>
+                    <td>Update</td>
                 </tr><?php
                 foreach ($_SESSION['keranjang'] as $item) {
                     mysql_select_db($database_koneksi, $koneksi);
@@ -41,6 +48,7 @@ if (!isset($_POST['checkout'])) {
                         <td><?php echo (int) $item['qty'] ?></td>
                         <td>Rp. </td>
                         <td style="text-align: right"><?php echo number_format((int) $item['qty'] * $barang_koleksi['harga'], 0, ',', '.') ?></td>
+                        <td><a href="trx_konfirmasi_beli.php?sid=<?php echo $item['sid'] ?>&caller=trx_checkout.php">Edit Qty</a> | <a href="trx_checkout_delete.php?sid=<?php echo $item['sid']?>">Delete</a></td>
                     </tr>
                     <?php
                     $total = $total + (int) $item['qty'] * $barang_koleksi['harga'];
@@ -50,12 +58,13 @@ if (!isset($_POST['checkout'])) {
                     <td colspan="4" style="text-align: right">Total : </td>
                     <td >Rp. </td>
                     <td ><?php echo number_format($total, 0, ',', '.') ?></td>
+                    <td> &nbsp;</td>
                 </tr>
                 <?php
             }
             ?>
         </table>
-        <button type="submit" name="checkout">Checkout</button>
+        << <a href="index.php">Lanjutkan Belanja</a>  <button type="submit" name="checkout">Checkout</button>
     </form>
     <?php
 } else {
@@ -67,12 +76,11 @@ if (!isset($_POST['checkout'])) {
     $sql = sprintf("insert INTO pemesanan (sid, tanggal, total_harga, register) values ('%s', now(), %d, '%s')", $sid, $total, $_SESSION['register_sid']);
     $result = mysql_query($sql, $koneksi) or die(mysql_error());
 
-    //input data ke detail pemesanan
+    //input data ke pemesanan detail
     $sql = "insert INTO pemesanan_detail (sid, pemesanan, kode_barang, jumlah) values";
     $first = true;
 
     foreach ($_SESSION['keranjang'] as $item) {
-//        $sql = $sql. ($first)?"":",".'( uuid(), $sid, $item["sid"], $item["qty"])';
         $barang_sid = $item['sid'];
         $barang_qty = (int) $item['qty'];
         $sql .= ($first ? "" : ",") . " (uuid(), '$sid', '$barang_sid', $barang_qty)";

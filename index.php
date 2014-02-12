@@ -53,7 +53,7 @@ $startRow_form_barang_koleksi = $pageNum_form_barang_koleksi * $maxRows_form_bar
 
 mysql_select_db($database_koneksi, $koneksi);
 
-$filter = isset($_SESSION['cat'])?sprintf("where barang_jenis = '%s'", $_SESSION["cat"]):'';
+$filter = isset($_SESSION['cat']) ? sprintf("where barang_jenis = '%s'", $_SESSION["cat"]) : '';
 $query_form_barang_koleksi = sprintf("SELECT * FROM barang_koleksi %s", $filter);
 $barang_jenis = "";
 
@@ -94,24 +94,28 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
         <title>Home </title>
     </head>
     <body>
-        <h2><a href="index.php"> Selamat Datang</a></h2>
-        [ 
-        <?php
-        mysql_select_db($database_koneksi, $koneksi);
-        $query = sprintf("select * FROM barang_jenis");
-        $result = mysql_query($query);
-
-        while ($data = mysql_fetch_assoc($result)) {
-            ?>
-            <a href="<?php printf("%s?cat=%s%s", $currentPage, $data['sid'], $queryString_form_barang_koleksi); ?>"><?php echo $data['nama_jenis'] ?></a>
+        <h2 style="display: inline"><a href="index.php"> Selamat Datang</a></h2> 
+        <?php if (isset($_SESSION['register_sid'])): ?>
+            [ <a href="logout.php">Logout</a> ]
+        <?php endif; ?>
+        <p>
+            [ 
             <?php
-        }
-        ?>
-<!--            <a href="<?php printf("%s?cat=%s%s", $currentPage, 'all', $queryString_form_barang_koleksi); ?>">All</a>-->
-        ]
+            mysql_select_db($database_koneksi, $koneksi);
+            $query = sprintf("select * FROM barang_jenis");
+            $result = mysql_query($query);
 
-        [ <a href="trx_checkout.php">Checkout</a> ]
-        [ <a href="trx_konfirmasi_pembayaran.php">Konfirmasi Pembayaran</a> ]
+            while ($data = mysql_fetch_assoc($result)) {
+                ?>
+                <a href="<?php printf("%s?cat=%s%s", $currentPage, $data['sid'], $queryString_form_barang_koleksi); ?>"><?php echo $data['nama_jenis'] ?></a>
+                <?php
+            }
+            ?>
+<!--            <a href="<?php printf("%s?cat=%s%s", $currentPage, 'all', $queryString_form_barang_koleksi); ?>">All</a>-->
+            ]
+
+            [ <a href="trx_checkout.php">Checkout</a> ]
+            [ <a href="trx_konfirmasi_pembayaran.php">Konfirmasi Pembayaran</a> ]
 
 
 
@@ -152,16 +156,16 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
         </form>
         <table border="0">
             <tr>
-                <td><?php if ($pageNum_form_barang_koleksi > 0) { // Show if not first page          ?>
+                <td><?php if ($pageNum_form_barang_koleksi > 0) { // Show if not first page            ?>
                         <a href="<?php printf("%s?cat=%s&pageNum_form_barang_koleksi=%d%s", $currentPage, $cat, 0, $queryString_form_barang_koleksi); ?>">First</a>
                     <?php } // Show if not first page    ?></td>
-                <td><?php if ($pageNum_form_barang_koleksi > 0) { // Show if not first page        ?>
+                <td><?php if ($pageNum_form_barang_koleksi > 0) { // Show if not first page          ?>
                         <a href="<?php printf("%s?cat=%s&pageNum_form_barang_koleksi=%d%s", $currentPage, $cat, max(0, $pageNum_form_barang_koleksi - 1), $queryString_form_barang_koleksi); ?>">Previous</a>
                     <?php } // Show if not first page    ?></td>
-                <td><?php if ($pageNum_form_barang_koleksi < $totalPages_form_barang_koleksi) { // Show if not last page        ?>
+                <td><?php if ($pageNum_form_barang_koleksi < $totalPages_form_barang_koleksi) { // Show if not last page          ?>
                         <a href="<?php printf("%s?cat=%s&pageNum_form_barang_koleksi=%d%s", $currentPage, $cat, min($totalPages_form_barang_koleksi, $pageNum_form_barang_koleksi + 1), $queryString_form_barang_koleksi); ?>">Next</a>
                     <?php } // Show if not last page    ?></td>
-                <td><?php if ($pageNum_form_barang_koleksi < $totalPages_form_barang_koleksi) { // Show if not last page        ?>
+                <td><?php if ($pageNum_form_barang_koleksi < $totalPages_form_barang_koleksi) { // Show if not last page          ?>
                         <a href="<?php printf("%s?cat=%s&pageNum_form_barang_koleksi=%d%s", $currentPage, $cat, $totalPages_form_barang_koleksi, $queryString_form_barang_koleksi); ?>">Last</a>
                     <?php } // Show if not last page    ?></td>
             </tr>
@@ -175,6 +179,7 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
     <?php
     print_r($_SESSION);
     ?>
+</p>
 </body>
 </html>
 <?php
