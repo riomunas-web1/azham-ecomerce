@@ -2,11 +2,10 @@
 require_once('Connections/koneksi.php');
 session_start();
 
-if (!isset($_POST['checkout'])) {    
+if (!isset($_POST['submit'])) {    
     ?>
     <form method="post" action="">
         <table border="1">
-            <?php if (isset($_SESSION['keranjang'])) { ?>
                 <tr>
                     <td>Nama Barang</td>
                     <td colspan="2">@harga</td>
@@ -40,11 +39,8 @@ if (!isset($_POST['checkout'])) {
                     <td >Rp. </td>
                     <td ><?php echo number_format($total, 0, ',', '.') ?></td>
                 </tr>
-                <?php
-            }
-            ?>
         </table>
-        <button type="submit" name="checkout">Checkout</button>
+        <button type="submit" name="submit">Submit</button>
     </form>
     <?php
 } else {
