@@ -42,19 +42,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
 //if (($_POST["MM_insert"] == "form1")) {
     //cek ke database
     mysql_select_db($database_koneksi, $koneksi);
-    $sql = sprintf("select * from register where username = %s and password = %s", 
-            GetSQLValueString($_POST['username'], "text"),
-            GetSQLValueString($_POST['password'], "text"));    
-    
+    $sql = sprintf("select * from register where username = %s and password = %s", GetSQLValueString($_POST['username'], "text"), GetSQLValueString($_POST['password'], "text"));
+
     $result = mysql_query($sql, $koneksi) or die(mysql_error());
-    
+
 //    $rows = mysql_fetch_object($result);
     if (mysql_num_rows($result) == 1) {
         $register = mysql_fetch_object($result);
         session_start();
         $message = "";
-        $_SESSION['user_sid'] = ($register->sid);
-        header("Location: index.php");
+        $_SESSION['register_sid'] = ($register->sid);
+        if (!isset($_SESSION['caller'])) {
+            header("Location: index.php");
+        } else {
+            header(sprintf("Location:%s", $_SESSION['caller']));
+        }
     } else {
 //        echo 'else';
         $message = "Login Salah !!!";
@@ -101,7 +103,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
         <title>Untitled Document</title>
     </head>
     <body>
-        <center><?php echo (strlen($message)==0)? "": $message  ?></center>
+        <center><?php echo (strlen($message) == 0) ? "" : $message ?></center>
         <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
             <table align="center">
                 <tr valign="baseline">
