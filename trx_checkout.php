@@ -58,28 +58,30 @@ if (!isset($_POST['checkout'])) {
         <button type="submit" name="checkout">Checkout</button>
     </form>
     <?php
-} else {    
+} else {
     //input data ke pemesanan
-    $sql = sprintf("insert INTO pemesanan (sid, tanggal, total_harga, register) values (uuid(), now(), %d, '%s')", $total, $_SESSION['register_sid']);
     mysql_select_db($database_koneksi, $koneksi);
+    $result = mysql_query("select uuid() as sid", $koneksi);
+    $uuid = mysql_fetch_array($result);
+    $sid = $uuid['sid'];
+    $sql = sprintf("insert INTO pemesanan (sid, tanggal, total_harga, register) values ('%s', now(), %d, '%s')", $sid, $total, $_SESSION['register_sid']);
     $result = mysql_query($sql, $koneksi) or die(mysql_error());
-    $sid = mysql_insert_id();
-    echo $sid;
-    
+
     //input data ke detail pemesanan
     $sql = "insert INTO pemesanan_detail (sid, pemesanan, kode_barang, jumlah) values";
     $first = true;
-    print_r($_SESSION['keranjang']);
-    print_r($sid);
-    
+
     foreach ($_SESSION['keranjang'] as $item) {
-        $sql = $sql. ($first)?"":",".'( uuid(), $sid, $item["sid"], $item["qty"])';
+//        $sql = $sql. ($first)?"":",".'( uuid(), $sid, $item["sid"], $item["qty"])';
+        $barang_sid = $item['sid'];
+        $barang_qty = (int) $item['qty'];
+        $sql .= ($first ? "" : ",") . " (uuid(), '$sid', '$barang_sid', $barang_qty)";
+        $first = false;
     }
     
-    echo $sql;
-
+    $result = mysql_query($sql, $koneksi) or die(mysql_error());
     if ($result == 1) {
-//        unset($_SESSION['keranjang']);
+        unset($_SESSION['keranjang']);
         echo 'Pesanan sudah disimpan <br/>';
         echo 'Silakan melakukan pembayaran dan konfirmasi pembayaran <br/>';
         echo '<a href="index.php">Kembali ke halaman awal</a>';
