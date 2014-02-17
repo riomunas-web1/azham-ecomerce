@@ -176,10 +176,6 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
     </center>
 
     <hr/>
-    <?php
-    print_r($_SESSION);
-    ?>
-</p>
 </body>
 </html>
 <?php

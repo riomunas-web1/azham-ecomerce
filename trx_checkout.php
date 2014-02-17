@@ -8,13 +8,22 @@ if (!isset($_SESSION['register_sid'])) {
 }
 
 //kalau keranjang belum ada kembalikan ke halaman index.php
+$data_ada = true;
 if (!isset($_SESSION['keranjang'])) {
-    header("Location:index.php");
+//    header("Location:index.php");
+    $data_ada = false;
 } else {
-    if (count($_SESSION['keranjang']) ==0 ) {
+    if (count($_SESSION['keranjang']) == 0) {
         unset($_SESSION['keranjang']);
-        header("Location:index.php");
+        $data_ada = false;
+//        header("Location:index.php");
     }
+}
+
+if (!$data_ada) {
+    echo "Data transaksi belum ada <br/>";
+    echo '<a href="index.php">Kembali ke halaman awal</a>';
+    die();
 }
 
 $total = 0;
@@ -48,7 +57,7 @@ if (!isset($_POST['checkout'])) {
                         <td><?php echo (int) $item['qty'] ?></td>
                         <td>Rp. </td>
                         <td style="text-align: right"><?php echo number_format((int) $item['qty'] * $barang_koleksi['harga'], 0, ',', '.') ?></td>
-                        <td><a href="trx_konfirmasi_beli.php?sid=<?php echo $item['sid'] ?>&caller=trx_checkout.php">Edit Qty</a> | <a href="trx_checkout_delete.php?sid=<?php echo $item['sid']?>">Delete</a></td>
+                        <td><a href="trx_konfirmasi_beli.php?sid=<?php echo $item['sid'] ?>&caller=trx_checkout.php">Edit Qty</a> | <a href="trx_checkout_delete.php?sid=<?php echo $item['sid'] ?>">Delete</a></td>
                     </tr>
                     <?php
                     $total = $total + (int) $item['qty'] * $barang_koleksi['harga'];
@@ -77,7 +86,7 @@ if (!isset($_POST['checkout'])) {
     $result = mysql_query($sql, $koneksi) or die(mysql_error());
 
     //input data ke pemesanan detail
-    $sql = "insert INTO pemesanan_detail (sid, pemesanan, kode_barang, jumlah) values";
+    $sql = "insert INTO pemesanan_detail (sid, pemesanan, barang_koleksi, jumlah) values";
     $first = true;
 
     foreach ($_SESSION['keranjang'] as $item) {
@@ -86,7 +95,7 @@ if (!isset($_POST['checkout'])) {
         $sql .= ($first ? "" : ",") . " (uuid(), '$sid', '$barang_sid', $barang_qty)";
         $first = false;
     }
-    
+
     $result = mysql_query($sql, $koneksi) or die(mysql_error());
     if ($result == 1) {
         unset($_SESSION['keranjang']);

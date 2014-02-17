@@ -64,7 +64,7 @@ $totalPages_pemesanan_detail = ceil($totalRows_pemesanan_detail / $maxRows_pemes
         <table border="1">
             <tr>
                 <td></td>
-                <td>kode_barang</td>
+                <td>barang_koleksi</td>
                 <td>nama_barang</td>
                 <td>quantity</td>
                 <td>harga</td>
