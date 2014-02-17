@@ -679,10 +679,10 @@ INSERT INTO `pemesanan` (`sid`, `tanggal`, `jam`, `status_bayar`, `total_harga`,
 CREATE TABLE IF NOT EXISTS `pemesanan_detail` (
   `sid` varchar(36) NOT NULL,
   `pemesanan` varchar(36) NOT NULL,
-  `kode_barang` varchar(36) NOT NULL,
+  `barang_koleksi` varchar(36) NOT NULL,
   `jumlah` int(11) NOT NULL,
   KEY `pemesanan` (`pemesanan`),
-  KEY `kode_barang` (`kode_barang`)
+  KEY `barang_koleksi` (`barang_koleksi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -732,7 +732,7 @@ ALTER TABLE `login`
 --
 ALTER TABLE `pemesanan_detail`
   ADD CONSTRAINT `pemesanan_detail_ibfk_1` FOREIGN KEY (`pemesanan`) REFERENCES `pemesanan` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pemesanan_detail_ibfk_2` FOREIGN KEY (`barang_koleksi`) REFERENCES `barang_koleksi` (`sid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
