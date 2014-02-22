@@ -146,11 +146,8 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
                             <?php
                             $path = $row_form_barang_koleksi['gambar'];
                             if (strlen($path) == 0) {
-                                echo '<img src="files/toshibaputih.jpg" height="80"width="80"/>';
-								
+                                echo 'no-image';
                             }
-							 else
-							 echo '<img src="files/Acer-laptop.jpg" height="80"width="80"/>';
                             ?>
                         </td>
                     </tr>
