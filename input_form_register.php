@@ -119,31 +119,31 @@ else {
   <table align="center">
     <tr valign="baseline">
       <td nowrap align="right">Username:</td>
-      <td><input type="text" name="username" value="" size="32"></td>
+      <td align=left><input type="text" name="username" value="" size="32"></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right">Email:</td>
-      <td><input type="text" name="email" value="" size="32"></td>
+      <td align=left><input type="text" name="email" value="" size="32"></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right">Password:</td>
-      <td><input type="password" name="password" value="" size="32"></td>
+      <td align=left><input type="password" name="password" value="" size="32"></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right">Confirm password:</td>
-      <td><input type="password" name="confirm_password" value="" size="32"></td>
+      <td align=left><input type="password" name="confirm_password" value="" size="32"></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right" valign="top">Alamat:</td>
-      <td><textarea name="alamat" cols="50" rows="5"></textarea></td>
+      <td align=left><textarea name="alamat" cols="31" rows="5"></textarea></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right">No_telpon:</td>
-      <td><input type="text" name="no_telpon" value="+62" size="32"></td>
+      <td align=left><input type="text" name="no_telpon" value="+62" size="32"></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right" valign="top">Keterangan:</td>
-      <td><textarea name="keterangan" cols="50" rows="5"></textarea></td>
+      <td align=left><textarea name="keterangan" cols="31" rows="5"></textarea></td>
   </tr>
   <tr valign="baseline">
       <td nowrap align="right">&nbsp;</td>

@@ -152,8 +152,7 @@ $queryString_form_barang_koleksi = sprintf("&stotalRows_form_barang_koleksi=%d%s
                             } else {
                                 echo '<img src="files/'.$path.'" height="80"width="80"/>';
 								
-                            } else {
-                                echo '<img src="files/'.$path.'" height="80"width="80"/>';
+                            
                             }
                             ?>
                         </td>
