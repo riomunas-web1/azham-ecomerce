@@ -121,7 +121,7 @@ window.location="form_barang_koleksi.php";
         <?php 
 do {  
 ?>
-        <option value="<?php echo $row_barang_jenis['nama_jenis']?>" ><?php echo $row_barang_jenis['sid']?></option>
+        <option value="<?php echo $row_barang_jenis['sid']?>" ><?php echo $row_barang_jenis['nama_jenis']?></option>
         <?php
 } while ($row_barang_jenis = mysql_fetch_assoc($barang_jenis));
 ?>
