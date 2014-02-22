@@ -47,7 +47,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['nama_barang'], "text"),
                        GetSQLValueString($_POST['harga'], "int"),
                        GetSQLValueString($_POST['stock'], "int"),
-                       GetSQLValueString($_POST['tipe'], "text"),
+                       GetSQLValueString($_POST['barang_jenis'], "text"),
                        GetSQLValueString($_FILES['gambar']['name'], "text"));
 					   
     if (empty($_POST['nama_barang']) || empty($_POST['harga']) || empty($_POST['stock'])| empty($_POST['stock'])| empty($_FILES['gambar']['name'])) {  
