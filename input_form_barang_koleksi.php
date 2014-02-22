@@ -31,6 +31,12 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+mysql_select_db($database_koneksi, $koneksi);
+$query_barang_jenis = "SELECT * FROM barang_jenis";
+$barang_jenis = mysql_query($query_barang_jenis, $koneksi) or die(mysql_error());
+$row_barang_jenis = mysql_fetch_assoc($barang_jenis);
+$totalRows_barang_jenis = mysql_num_rows($barang_jenis);
+
 $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
@@ -109,10 +115,19 @@ window.location="form_barang_koleksi.php";
         <option value="7" <?php if (!(strcmp("7", ""))) {echo "SELECTED";} ?>>7</option>
       </select></td>
     </tr>    
-    <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Tipe:</td>
-      <td><input type="text" name="tipe" value="" size="32" /></td>
+<tr valign="baseline">
+      <td nowrap="nowrap" align="right">Barang_jenis:</td>
+      <td><select name="barang_jenis">
+        <?php 
+do {  
+?>
+        <option value="<?php echo $row_barang_jenis['nama_jenis']?>" ><?php echo $row_barang_jenis['sid']?></option>
+        <?php
+} while ($row_barang_jenis = mysql_fetch_assoc($barang_jenis));
+?>
+      </select></td>
     </tr>
+    <tr> </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Gambar:</td>
       
@@ -135,3 +150,6 @@ window.location="form_barang_koleksi.php";
 <p>&nbsp;</p>
 </body>
 </html>
+<?php
+mysql_free_result($barang_jenis);
+?>
